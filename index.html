@@ -104,9 +104,18 @@ html.cap .scrollcue{display:none}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:100%;gap:16px}
 .nav .brand{display:flex;align-items:center;flex:none}
 .nav .brand img{height:26px;width:auto;flex:none;filter:var(--logo-filter)}
-.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links{display:flex;gap:28px;align-items:center;position:relative}
 .nav-links a{font-weight:600;font-size:14px;color:var(--muted);transition:color .18s}
 .nav-links a:hover{color:var(--ink)}
+.nav-links a.now{color:var(--ink)}
+/* one underline that travels between links as you scroll: a single object moving,
+   not five links swapping styles */
+.nav-ind{position:absolute;bottom:-6px;left:0;height:2px;background:var(--ink);width:0;
+ transition:transform .4s var(--ease),width .4s var(--ease);opacity:0}
+.nav-ind.on{opacity:1}
+/* reading progress along the nav's bottom edge */
+.nav-prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--ink);
+ transform:scaleX(0);transform-origin:left;opacity:.85}
 .nav-tools{display:flex;align-items:center;gap:10px}
 .tbtn{width:44px;height:44px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);
  transition:border-color .2s,transform .2s var(--ease)}
@@ -196,9 +205,7 @@ html.js:not(.rm) .scrollcue::after{content:"";display:block;width:1px;height:32p
 .step p{color:var(--muted);margin-top:6px;max-width:58ch}
 @media(max-width:600px){.step{grid-template-columns:44px 1fr;gap:12px;padding:26px 0}}
 
-/* ═══ QUIZ ═══ */
-.quiz{border:1px solid var(--line);border-radius:18px;padding:clamp(24px,4vw,40px);background:var(--surface)}
-.quiz .qlabel{font-size:14px;color:var(--muted)}
+/* ═══ PROBLEM PICKER (hero) ═══ */
 .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .chip{border:1px solid var(--line-2);border-radius:999px;padding:12px 18px;font-size:14.5px;font-weight:600;
  min-height:46px;transition:all .2s var(--ease)}
@@ -206,6 +213,11 @@ html.js:not(.rm) .scrollcue::after{content:"";display:block;width:1px;height:32p
 .chip.on{background:var(--btn-bg);color:var(--btn-ink);border-color:var(--btn-bg)}
 .qresult{margin-top:22px;display:none;border-top:1px solid var(--line);padding-top:20px;line-height:1.75}
 .qresult .btn{margin-top:16px}
+.hero-chips{margin-top:28px;position:relative;z-index:2}
+.hero-result{max-width:56ch;color:var(--muted);position:relative;z-index:2}
+.hero-result b{color:var(--ink)}
+.hero-result .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.hero-result .acts .btn{margin-top:0}
 
 /* ═══ ABOUT ═══ */
 .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,72px);align-items:start}
@@ -260,11 +272,12 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
  <div class="wrap">
   <a href="#top" class="brand" aria-label="Business Booster home"><img src="assets/logo.png" alt="Business Booster" width="600" height="243"></a>
   <nav class="nav-links" aria-label="Main">
-   <a href="#services">What we do</a>
-   <a href="#work">The work</a>
-   <a href="#process">How it works</a>
-   <a href="#about">About</a>
-   <a href="#contact">Contact</a>
+   <a href="#services" data-spy="services">What we do</a>
+   <a href="#work" data-spy="work">The work</a>
+   <a href="#process" data-spy="process">How it works</a>
+   <a href="#about" data-spy="about">About</a>
+   <a href="#contact" data-spy="contact">Contact</a>
+   <span class="nav-ind" id="navInd" aria-hidden="true"></span>
   </nav>
   <div class="nav-tools">
    <button class="tbtn" id="themeBtn" aria-label="Switch between dark and light theme">
@@ -277,6 +290,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
    </button>
   </div>
  </div>
+ <span class="nav-prog" id="navProg" aria-hidden="true"></span>
 </header>
 
 <div class="scrim" id="scrim"></div>
@@ -304,14 +318,21 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
  <div class="wrap">
   <p class="eyebrow">Growth agency &middot; Colombo, Sri Lanka</p>
   <h1 style="margin-top:18px">
-   <span class="w"><span class="wi" style="--i:0">The</span></span>
-   <span class="w"><span class="wi" style="--i:1">agency</span></span>
-   <span class="w"><span class="wi" style="--i:2">that</span></span>
-   <span class="w"><span class="wi" style="--i:3">shows</span></span>
-   <span class="w"><span class="wi" style="--i:4">its</span></span>
-   <span class="w"><span class="wi" style="--i:5">work.</span></span>
+   <span class="w"><span class="wi" style="--i:0">What</span></span>
+   <span class="w"><span class="wi" style="--i:1">is</span></span>
+   <span class="w"><span class="wi" style="--i:2">slowing</span></span>
+   <span class="w"><span class="wi" style="--i:3">your</span></span>
+   <span class="w"><span class="wi" style="--i:4">business</span></span>
+   <span class="w"><span class="wi" style="--i:5">down?</span></span>
   </h1>
-  <p class="sub">Marketing, websites and business systems for 20+ Sri Lankan businesses. Everything below is live on the internet right now. Click anything.</p>
+  <p class="sub">Pick the problem. We will show you how we fix it, with live work as the proof. We build for 20+ Sri Lankan businesses and everything on this page is real.</p>
+  <div class="chips hero-chips" id="probChips">
+   <button class="chip" data-prob="sales">We need more sales</button>
+   <button class="chip" data-prob="invisible">Nobody finds us online</button>
+   <button class="chip" data-prob="website">The website lets us down</button>
+   <button class="chip" data-prob="admin">Too much manual admin</button>
+  </div>
+  <div class="qresult hero-result" id="probResult" aria-live="polite"></div>
   <div class="ctas">
    <a class="btn btn-solid" href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20saw%20your%20site%20and%20I%20want%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.74 1.2c5.46 0 9.9-4.43 9.9-9.9 0-5.45-4.44-9.9-9.9-9.9zm5.8 14.02c-.24.68-1.4 1.3-1.94 1.34-.5.05-1.13.24-3.7-.78-3.12-1.23-5.1-4.4-5.26-4.6-.15-.2-1.25-1.66-1.25-3.17 0-1.5.79-2.24 1.07-2.55.28-.3.6-.38.8-.38.2 0 .4 0 .58.01.19.01.44-.07.68.53.24.6.83 2.08.9 2.23.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.32.39-.45.52-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.07 1.31 2.37 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.7.8 2 .95.29.15.48.22.55.34.07.12.07.7-.17 1.38z"/></svg>
@@ -331,21 +352,21 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
    <p>Most agencies sell activity. We sell the three things that actually move a business, and we would rather do fewer things properly.</p>
   </div>
   <div class="stack">
-   <div class="srow" data-srow>
+   <div class="srow" data-srow id="arm-attract">
     <div class="word"><span class="big">Attract.</span><span class="rule" data-rule></span></div>
     <div class="copy" data-copy>
      <p>Strategy-first marketing on a monthly retainer. Content built to sell and paid reach with tracking switched on. You get the same seven numbers reported every month, compared against the month before, whether they flatter us or not.</p>
      <a class="go" href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20want%20to%20ask%20about%20your%20marketing%20retainers." target="_blank" rel="noopener">Ask about marketing<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
     </div>
    </div>
-   <div class="srow" data-srow>
+   <div class="srow" data-srow id="arm-convert">
     <div class="word"><span class="big">Convert.</span><span class="rule" data-rule></span></div>
     <div class="copy" data-copy>
      <p>Websites designed and built in-house, with SEO baked in from day one. Fast, honest pages that turn a visitor into a WhatsApp conversation. The page you are reading is our own work, judge it as a sample.</p>
      <a class="go" href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20want%20to%20ask%20about%20a%20website." target="_blank" rel="noopener">Ask about a website<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
     </div>
    </div>
-   <div class="srow" data-srow>
+   <div class="srow" data-srow id="arm-automate">
     <div class="word"><span class="big">Automate.</span><span class="rule" data-rule></span></div>
     <div class="copy" data-copy>
      <p>Business systems we call digital staff. They track the fees, chase the follow-ups and prepare the reports a growing business forgets. Your people stay in charge. The system does the remembering.</p>
@@ -419,25 +440,6 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
   </div>
   <div style="margin-top:36px" data-rv>
    <a class="btn btn-solid" href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20let%27s%20start%20with%20step%20one.%20Here%27s%20my%20business%3A%20" target="_blank" rel="noopener">Start step one</a>
-  </div>
- </div>
-</section>
-
-<section class="section" id="quiz" style="padding-top:0">
- <div class="wrap">
-  <div class="sect-head" data-rv>
-   <p class="eyebrow">A thirty second diagnosis</p>
-   <h2>Where is your growth leaking?</h2>
-  </div>
-  <div class="quiz" data-rv>
-   <p class="qlabel">Tap the one that hurts the most right now:</p>
-   <div class="chips" id="chips">
-    <button class="chip" data-leak="views">People see us, nobody buys</button>
-    <button class="chip" data-leak="invisible">Nobody sees us at all</button>
-    <button class="chip" data-leak="leads">Enquiries come, then vanish</button>
-    <button class="chip" data-leak="adhoc">We post, but there is no plan</button>
-   </div>
-   <div class="qresult" id="qresult" aria-live="polite"></div>
   </div>
  </div>
 </section>
@@ -550,9 +552,29 @@ var nav=document.getElementById('nav');
 var rv=[].slice.call(document.querySelectorAll('[data-rv]'));
 var rows=[].slice.call(document.querySelectorAll('[data-srow]'));
 var mark=document.getElementById('heroMark');
+var navInd=document.getElementById('navInd'),navProg=document.getElementById('navProg');
+var spyLinks=[].slice.call(document.querySelectorAll('[data-spy]'));
 function frame(){
  nav.classList.toggle('stick',window.scrollY>8);
  var vh=window.innerHeight;
+ /* reading progress along the nav */
+ var doc=document.documentElement;
+ var total=doc.scrollHeight-vh;
+ navProg.style.transform='scaleX('+(total>0?Math.min(1,window.scrollY/total):0).toFixed(4)+')';
+ /* scrollspy: the one underline travels to the section you are in */
+ var current=null;
+ spyLinks.forEach(function(a){
+  var sec=document.getElementById(a.dataset.spy);
+  if(sec&&sec.getBoundingClientRect().top<vh*.4)current=a;
+ });
+ spyLinks.forEach(function(a){a.classList.toggle('now',a===current)});
+ if(current){
+  navInd.classList.add('on');
+  navInd.style.width=current.offsetWidth+'px';
+  navInd.style.transform='translateX('+current.offsetLeft+'px)';
+ }else{
+  navInd.classList.remove('on');
+ }
  rv.forEach(function(el){
   if(el.getBoundingClientRect().top<vh-70)el.classList.add('in');
  });
@@ -613,25 +635,25 @@ document.addEventListener('keydown',function(e){
  else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}
 });
 
-/* leak finder: deterministic diagnosis, tailored WhatsApp handoff */
-var LEAKS={
- views:{d:'<b>Attention without a next step.</b> People are looking at a page or a profile that gives them nothing to do. The fix is usually a sharper offer and a faster route into a conversation, and it is quicker than most owners expect.',
-  m:'Hi Business Booster. People see us but sales do not follow. Can we talk?'},
- invisible:{d:'<b>A visibility problem, and the cheapest kind to fix.</b> In most Sri Lankan categories the bar for consistent, planned content is low. Show up properly for ninety days and you start to look like the market leader.',
-  m:'Hi Business Booster. Nobody sees us online. Can we talk?'},
- leads:{d:'<b>A follow-up gap.</b> Most enquiries go cold in hours because a busy human forgot, not because the customer changed their mind. This is exactly the job we give digital staff: chase what the team forgets and report what happened.',
-  m:'Hi Business Booster. Our enquiries keep vanishing. Can we talk?'},
- adhoc:{d:'<b>Decoration, not marketing.</b> A real plan means pillars, a calendar and content with a job to do. Strategy comes first. The posting follows it, never the other way round.',
-  m:'Hi Business Booster. We post but there is no plan behind it. Can we talk?'}
+/* problem picker: deterministic diagnosis, routed to the right arm plus WhatsApp */
+var PROBLEMS={
+ sales:{d:'<b>More sales starts with attention that converts.</b> Strategy-first content, tracked paid reach and an honest monthly report of the same seven numbers. That is our Attract retainer, and it is built to be judged on enquiries.',
+  m:'Hi Business Booster. We need more sales. Can we talk?',a:'#arm-attract',al:'See how Attract works'},
+ invisible:{d:'<b>A visibility problem, and the cheapest kind to fix.</b> We bake SEO into every site from day one and run the content that gets you found. Show up properly for ninety days and the market starts treating you like the leader.',
+  m:'Hi Business Booster. Nobody finds us online. Can we talk?',a:'#arm-convert',al:'See how Convert works'},
+ website:{d:'<b>A slow or dated site quietly drops enquiries every day.</b> We design and build fast, honest pages in-house that turn a visitor into a WhatsApp conversation. You are reading a sample of our work right now.',
+  m:'Hi Business Booster. Our website is letting us down. Can we talk?',a:'#work',al:'See the live sites'},
+ admin:{d:'<b>Manual admin forgets things and does not scale.</b> We build digital staff: systems that chase the follow-ups and remember what a busy team cannot. Your people stay in charge.',
+  m:'Hi Business Booster. Too much manual admin is eating our week. Can we talk?',a:'#arm-automate',al:'See how Automate works'}
 };
-var chips=document.getElementById('chips'),qres=document.getElementById('qresult');
+var chips=document.getElementById('probChips'),qres=document.getElementById('probResult');
 chips.addEventListener('click',function(e){
  var ch=e.target.closest('.chip');if(!ch)return;
  [].slice.call(chips.children).forEach(function(x){x.classList.remove('on')});
  ch.classList.add('on');
- var L=LEAKS[ch.dataset.leak];
+ var P=PROBLEMS[ch.dataset.prob];
  qres.style.display='block';
- qres.innerHTML=L.d+'<br><a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+encodeURIComponent(L.m)+'">Fix this leak on WhatsApp</a>';
+ qres.innerHTML=P.d+'<div class="acts"><a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+encodeURIComponent(P.m)+'">Fix this on WhatsApp</a><a class="btn btn-line" href="'+P.a+'">'+P.al+'</a></div>';
 });
 })();
 </script>
