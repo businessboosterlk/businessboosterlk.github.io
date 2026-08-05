@@ -41,6 +41,7 @@
  --bg:#faf9f6; --surface:#ffffff; --ink:#111114; --muted:#54545c; --faint:#8b8b93;
  --line:rgba(17,17,20,.13); --line-2:rgba(17,17,20,.26);
  --btn-bg:#111114; --btn-ink:#faf9f6;
+ --accent:#f4490e; --accent-ink:#ffffff; --acid:#d8f23c;
  --shadow:0 2px 6px rgba(17,17,20,.05), 0 10px 30px rgba(17,17,20,.07);
  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
  --ease:cubic-bezier(.16,1,.3,1);
@@ -51,6 +52,7 @@
  --bg:#0b0b0d; --surface:#141416; --ink:#f2efe9; --muted:#a9a9b0; --faint:#75757e;
  --line:rgba(242,239,233,.14); --line-2:rgba(242,239,233,.30);
  --btn-bg:#f2efe9; --btn-ink:#0b0b0d;
+ --accent:#ff5c26; --accent-ink:#0b0b0d; --acid:#d8f23c;
  --shadow:0 2px 8px rgba(0,0,0,.45), 0 14px 40px rgba(0,0,0,.5);
  --logo-filter:none;
 }
@@ -112,8 +114,8 @@ html.cap .scrollcue{display:none}
  transition:transform .4s var(--ease),width .4s var(--ease);opacity:0}
 .nav-ind.on{opacity:1}
 /* reading progress along the nav's bottom edge */
-.nav-prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--ink);
- transform:scaleX(0);transform-origin:left;opacity:.85}
+.nav-prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--accent);
+ transform:scaleX(0);transform-origin:left;opacity:.9}
 .nav-tools{display:flex;align-items:center;gap:10px}
 .tbtn{width:44px;height:44px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);
  transition:border-color .2s,transform .2s var(--ease)}
@@ -145,7 +147,7 @@ body.drawer-lock{position:fixed;width:100%}
 .hero-mark{position:absolute;right:-4%;top:14%;width:min(46vw,560px);opacity:.05;pointer-events:none;
  filter:var(--logo-filter);will-change:transform}
 .hero h1{font-size:clamp(42px,7.8vw,94px);font-weight:800;letter-spacing:-.035em;line-height:1.02;max-width:13ch}
-.hero h1 em,.closer h2 em{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:500;letter-spacing:-.01em}
+.hero h1 em,.closer h2 em{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:500;letter-spacing:-.01em;color:var(--accent)}
 .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
 .hero h1 .wi{display:inline-block}
 html.js .hero h1 .wi{transform:translateY(112%);animation:wrise .95s var(--ease) forwards;animation-delay:calc(.12s + var(--i)*.07s)}
@@ -185,6 +187,10 @@ html.js:not(.rm) .ribbon .lane{animation:lane 44s linear infinite}
  border-bottom:1px solid var(--line-2);padding-bottom:3px;align-self:flex-start;transition:border-color .2s,gap .2s var(--ease)}
 .arm .go:hover{border-color:currentColor;gap:12px}
 .arm .go svg{width:16px;height:16px}
+.go{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;border-bottom:1px solid var(--line-2);
+ padding-bottom:3px;transition:border-color .2s,gap .2s var(--ease)}
+.go:hover{border-color:currentColor;gap:12px}
+.go svg{width:16px;height:16px}
 .arm.fill{background:var(--btn-bg);color:var(--btn-ink);border-color:var(--btn-bg)}
 .arm.fill .tag{color:color-mix(in srgb,var(--btn-ink) 55%,transparent)}
 .arm.fill p{color:color-mix(in srgb,var(--btn-ink) 72%,transparent)}
@@ -225,6 +231,55 @@ html.js:not(.rm) .ribbon .lane{animation:lane 44s linear infinite}
  letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px var(--line-2)}
 .proof-head .count .l{display:block;margin-top:10px;font-size:12px;color:var(--faint);line-height:1.5}
 
+/* ═══ INDUSTRY MODE ═══ */
+.industry{border-bottom:1px solid var(--line);padding:13px 0}
+.industry .wrap{display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}
+.industry .wrap::-webkit-scrollbar{display:none}
+.industry .lbl{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);white-space:nowrap;flex:none}
+.ichip{flex:none;border:1px solid var(--line-2);border-radius:999px;padding:8px 15px;font-size:13px;font-weight:600;
+ white-space:nowrap;transition:all .2s var(--ease)}
+.ichip:hover{border-color:var(--accent);color:var(--accent)}
+.ichip.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.ireset{flex:none;display:none;font-size:12.5px;font-weight:700;color:var(--faint);text-decoration:underline;white-space:nowrap}
+.ireset.show{display:inline}
+.shot .forind{display:none;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.shot.match{border-color:var(--accent)}
+.shot.match .forind{display:inline}
+
+/* ═══ 60 SECOND AUDIT ═══ */
+.audit{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:clamp(24px,4vw,40px);max-width:780px}
+.aud-track{height:4px;background:var(--line);border-radius:999px;overflow:hidden;margin-bottom:26px}
+.aud-fill{height:100%;width:0;background:var(--accent);transition:width .35s var(--ease)}
+.aud-step{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.aud-q h3{font-size:clamp(19px,2.7vw,25px);font-weight:800;letter-spacing:-.015em;line-height:1.2}
+.aud-opts{display:grid;gap:10px;margin-top:20px}
+.aud-opt{text-align:left;border:1px solid var(--line-2);border-radius:12px;padding:14px 17px;font-size:14.5px;
+ font-weight:600;color:var(--ink);transition:border-color .2s,transform .2s var(--ease)}
+.aud-opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.aud-back{margin-top:18px;font-size:13px;font-weight:600;color:var(--faint);display:none}
+.aud-back.show{display:inline-block}
+.aud-score{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.aud-score .n{font-size:clamp(56px,7vw,84px);font-weight:800;letter-spacing:-.04em;color:var(--accent);font-variant-numeric:tabular-nums}
+.aud-score .of{color:var(--faint);font-size:15px}
+.aud-bars{display:grid;gap:12px;margin:22px 0}
+.aud-bar{display:grid;grid-template-columns:110px 1fr 44px;gap:12px;align-items:center;font-size:13.5px}
+.aud-bar .t{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+.aud-bar .f{height:100%;background:var(--accent);border-radius:999px;transition:width .8s var(--ease)}
+.aud-bar b{font-variant-numeric:tabular-nums;text-align:right}
+.aud-recs{margin:6px 0 4px;padding-left:0;list-style:none;display:grid;gap:10px}
+.aud-recs li{border-left:2px solid var(--accent);padding-left:14px;font-size:14.5px;color:var(--muted)}
+.aud-svc{display:inline-block;background:var(--acid);color:#111114;padding:7px 14px;border-radius:999px;font-weight:800;font-size:12.5px;letter-spacing:.02em}
+.aud-note{font-size:12.5px;color:var(--faint);margin-top:14px;line-height:1.6}
+.aud-brief{border-top:1px solid var(--line);margin-top:22px;padding-top:22px}
+.aud-brief .ins{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:600px){.aud-brief .ins{grid-template-columns:1fr}}
+.aud-in{width:100%;font:inherit;font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);
+ border-radius:10px;padding:12px 14px;transition:border-color .2s}
+.aud-in:focus{outline:none;border-color:var(--accent)}
+.aud-in.bad{border-color:#d33a3a}
+.aud-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.aud-restart{font-size:13px;font-weight:600;color:var(--faint);text-decoration:underline}
+
 /* ═══ PROCESS ═══ */
 .steps{counter-reset:st;border-top:1px solid var(--line)}
 .step{display:grid;grid-template-columns:72px 1fr;gap:18px;padding:32px 0;border-bottom:1px solid var(--line);align-items:baseline}
@@ -238,7 +293,7 @@ html.js:not(.rm) .ribbon .lane{animation:lane 44s linear infinite}
 .chip{border:1px solid var(--line-2);border-radius:999px;padding:12px 18px;font-size:14.5px;font-weight:600;
  min-height:46px;transition:all .2s var(--ease)}
 .chip:hover{border-color:var(--ink);transform:translateY(-1px)}
-.chip.on{background:var(--btn-bg);color:var(--btn-ink);border-color:var(--btn-bg)}
+.chip.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .qresult{margin-top:22px;display:none;border-top:1px solid var(--line);padding-top:20px;line-height:1.75}
 .qresult .btn{margin-top:16px}
 .hero-chips{margin-top:28px;position:relative;z-index:2}
@@ -301,6 +356,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
   <a href="#top" class="brand" aria-label="Business Booster home"><img src="assets/logo.png" alt="Business Booster" width="600" height="243"></a>
   <nav class="nav-links" aria-label="Main">
    <a href="#services" data-spy="services">What we do</a>
+   <a href="#audit" data-spy="audit">Free audit</a>
    <a href="#work" data-spy="work">The work</a>
    <a href="#process" data-spy="process">How it works</a>
    <a href="#about" data-spy="about">About</a>
@@ -331,6 +387,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
  </div>
  <nav aria-label="Menu">
   <a href="#services">What we do</a>
+  <a href="#audit">Free audit</a>
   <a href="#work">The work</a>
   <a href="#process">How it works</a>
   <a href="#about">About</a>
@@ -353,7 +410,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
    <span class="w"><span class="wi" style="--i:4">business</span></span>
    <span class="w"><span class="wi" style="--i:5">down?</span></span>
   </h1>
-  <p class="sub">Pick the problem. We will show you how we fix it, with live work as the proof. We build for 20+ Sri Lankan businesses and everything on this page is real.</p>
+  <p class="sub" id="heroSub">Pick the problem. We will show you how we fix it, with live work as the proof. We build for 20+ Sri Lankan businesses and everything on this page is real.</p>
   <div class="chips hero-chips" id="probChips">
    <button class="chip" data-prob="sales">We need more sales</button>
    <button class="chip" data-prob="invisible">Nobody finds us online</button>
@@ -373,6 +430,22 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
 </section>
 
 <div class="ribbon" aria-hidden="true"><div class="lane" id="ribbonLane"></div></div>
+
+<div class="industry" id="industry">
+ <div class="wrap" role="group" aria-label="Choose your industry">
+  <span class="lbl">Your industry</span>
+  <button class="ichip" data-ind="hospitality">Hospitality</button>
+  <button class="ichip" data-ind="retail">Retail</button>
+  <button class="ichip" data-ind="healthcare">Healthcare</button>
+  <button class="ichip" data-ind="education">Education</button>
+  <button class="ichip" data-ind="sports">Sports</button>
+  <button class="ichip" data-ind="travel">Travel</button>
+  <button class="ichip" data-ind="professional">Professional services</button>
+  <button class="ichip" data-ind="industrial">Industrial</button>
+  <button class="ichip" data-ind="other">Other</button>
+  <button class="ireset" id="iReset">Reset</button>
+ </div>
+</div>
 
 <section class="section" id="services" style="padding-top:clamp(60px,8vw,100px)">
  <div class="wrap">
@@ -404,6 +477,21 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
  </div>
 </section>
 
+<section class="section" id="audit" style="padding-top:0">
+ <div class="wrap">
+  <div class="sect-head" data-rv>
+   <p class="eyebrow">The sixty second audit</p>
+   <h2>Find the leak before it costs you.</h2>
+   <p>Seven quick questions about how your business attracts, converts and keeps customers. You get an indicative growth score, your three biggest gaps and the one service that would move the needle first.</p>
+  </div>
+  <div class="audit" data-rv id="auditBox">
+   <div class="aud-track" aria-hidden="true"><div class="aud-fill" id="audFill"></div></div>
+   <div id="audBody"><p style="color:var(--muted);font-size:14.5px">The audit runs in your browser and needs JavaScript switched on. If it is not loading, just <a href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20wanted%20the%20growth%20audit.%20Can%20we%20talk%3F" target="_blank" rel="noopener" style="font-weight:700;border-bottom:1px solid var(--line-2)">message us on WhatsApp</a> and we will run it with you.</p></div>
+   <button class="aud-back" id="audBack">&larr; Back</button>
+  </div>
+ </div>
+</section>
+
 <section class="section" id="work" style="padding-top:0">
  <div class="wrap">
   <div class="proof-head" data-rv>
@@ -421,32 +509,32 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
    <a class="shot span2" data-rv href="https://businessboosterlk.github.io/clove-beach/" target="_blank" rel="noopener">
     <span class="bar"><i></i><i></i><i></i><span class="url">businessboosterlk.github.io/clove-beach</span></span>
     <img src="assets/clove-beach.jpg" width="1200" height="750" alt="Clove Beach hotel website, a serif headline over a Wadduwa beach photograph" loading="lazy">
-    <span class="meta"><b>Clove Beach</b><span>Boutique hotel &middot; Wadduwa</span></span>
+    <span class="meta"><b>Clove Beach <i class="forind">&middot; your industry</i></b><span>Boutique hotel &middot; Wadduwa</span></span>
    </a>
    <a class="shot" data-rv href="https://businessboosterlk.github.io/rugbycode/" target="_blank" rel="noopener">
     <span class="bar"><i></i><i></i><i></i><span class="url">businessboosterlk.github.io/rugbycode</span></span>
     <img src="assets/rugbycode.jpg" width="1200" height="750" alt="Rugby Code website hero, floodlit training field at dusk" loading="lazy">
-    <span class="meta"><b>Rugby Code</b><span>Rugby development &middot; NZ</span></span>
+    <span class="meta"><b>Rugby Code <i class="forind">&middot; your industry</i></b><span>Rugby development &middot; NZ</span></span>
    </a>
    <a class="shot" data-rv href="https://businessboosterlk.github.io/scribblings-of-a-medic/" target="_blank" rel="noopener">
     <span class="bar"><i></i><i></i><i></i><span class="url">businessboosterlk.github.io/scribblings-of-a-medic</span></span>
     <img src="assets/scribblings-of-a-medic.jpg" width="1200" height="750" alt="Scribblings of a Medic website, editorial serif headline beside a portrait of the doctor" loading="lazy">
-    <span class="meta"><b>Scribblings of a Medic</b><span>Personal brand &middot; Colombo</span></span>
+    <span class="meta"><b>Scribblings of a Medic <i class="forind">&middot; your industry</i></b><span>Personal brand &middot; Colombo</span></span>
    </a>
    <a class="shot" data-rv href="https://businessboosterlk.github.io/sastho/" target="_blank" rel="noopener">
     <span class="bar"><i></i><i></i><i></i><span class="url">businessboosterlk.github.io/sastho</span></span>
     <img src="assets/sastho.jpg" width="1200" height="750" alt="Sastho retail website hero with a bold headline and store navigation" loading="lazy">
-    <span class="meta"><b>Sastho</b><span>Home and kitchen retail</span></span>
+    <span class="meta"><b>Sastho <i class="forind">&middot; your industry</i></b><span>Home and kitchen retail</span></span>
    </a>
    <a class="shot" data-rv href="https://businessboosterlk.github.io/waterman/" target="_blank" rel="noopener">
     <span class="bar"><i></i><i></i><i></i><span class="url">businessboosterlk.github.io/waterman</span></span>
     <img src="assets/waterman.jpg" width="1200" height="750" alt="Waterman website hero, a water droplet photograph behind an engineering headline" loading="lazy">
-    <span class="meta"><b>Waterman</b><span>Water engineering &middot; Sri Lanka</span></span>
+    <span class="meta"><b>Waterman <i class="forind">&middot; your industry</i></b><span>Water engineering &middot; Sri Lanka</span></span>
    </a>
    <a class="shot span2" data-rv href="https://businessboosterlk.github.io/sapphire-trails/" target="_blank" rel="noopener">
     <span class="bar"><i></i><i></i><i></i><span class="url">businessboosterlk.github.io/sapphire-trails</span></span>
     <img src="assets/sapphire-trails.jpg" width="1200" height="750" alt="Sapphire Trails website, serif headline over an aerial photograph of Ratnapura mining country" loading="lazy">
-    <span class="meta"><b>Sapphire Trails</b><span>Gem tourism &middot; Ratnapura</span></span>
+    <span class="meta"><b>Sapphire Trails <i class="forind">&middot; your industry</i></b><span>Gem tourism &middot; Ratnapura</span></span>
    </a>
   </div>
   <p class="alsolive" data-rv>Also live right now:
@@ -693,6 +781,158 @@ var PROBLEMS={
  admin:{d:'<b>Manual admin forgets things and does not scale.</b> We build digital staff: systems that chase the follow-ups and remember what a busy team cannot. Your people stay in charge.',
   m:'Hi Business Booster. Too much manual admin is eating our week. Can we talk?',a:'#arm-automate',al:'See how Automate works'}
 };
+/* ═══ BB EVENTS: local analytics queue. Nothing leaves the device. ═══
+   A future endpoint plugs in at the marked line via sendBeacon. Never put keys here. */
+window.bbEvents=window.bbEvents||[];
+function bbTrack(ev,data){
+ var row={ev:ev,data:data||null,t:new Date().toISOString()};
+ window.bbEvents.push(row);
+ try{var q=JSON.parse(localStorage.getItem('bb_events')||'[]');q.push(row);
+ localStorage.setItem('bb_events',JSON.stringify(q.slice(-100)));}catch(e){}
+ /* FUTURE: navigator.sendBeacon('<analytics-endpoint>', JSON.stringify(row)) */
+}
+document.addEventListener('click',function(e){
+ var wa=e.target.closest('a[href*="wa.me"]');
+ if(wa)bbTrack('whatsapp_cta_clicked',{href:wa.getAttribute('href').slice(0,90)});
+ var shot=e.target.closest('.shot');
+ if(shot)bbTrack('project_viewed',{site:(shot.getAttribute('href')||'').split('/').filter(Boolean).pop()});
+});
+document.getElementById('themeBtn').addEventListener('click',function(){bbTrack('theme_switched')});
+
+/* ═══ INDUSTRY MODE: one choice personalises the page, stored locally, reset in view ═══ */
+var IND={
+ hospitality:{sub:'Hotels and villas grow on direct bookings. We build the pages and the presence that fill rooms without handing the margin to the booking sites.',match:['clove-beach','sapphire-trails','ceylon-carriers']},
+ retail:{sub:'Retail grows on repeat attention. We build the content, the offers and the storefronts that keep your shop in people\'s pockets.',match:['sastho']},
+ healthcare:{sub:'Trust is the whole game in healthcare. We build the presence that makes patients feel they know you before the first visit.',match:['scribblings-of-a-medic']},
+ education:{sub:'Parents choose the teacher they can see. We build the presence and the fee systems that fill classes and chase nothing by hand.',match:['bswl','bswl-demo']},
+ sports:{sub:'Sport sells belonging. We build the brand and the pages that turn a programme into something people sign up for.',match:['rugbycode']},
+ travel:{sub:'Travellers buy the feeling before the ticket. We build the pages and the content that make yours the experience they book.',match:['ceylon-carriers','sapphire-trails','clove-beach']},
+ professional:{sub:'Expertise nobody sees earns nothing. We build the personal brands and pipelines that turn skill into enquiries.',match:['scribblings-of-a-medic']},
+ industrial:{sub:'B2B buyers check you out long before they call. We build the site and the proof that win you the shortlist.',match:['waterman']},
+ other:{sub:'Whatever the trade, growth is the same three jobs. Attract attention, convert it and never drop a follow-up.',match:[]}
+};
+var heroSub=document.getElementById('heroSub'),defSub=heroSub.textContent,curInd=null;
+function slugOf(a){return (a.getAttribute('href')||'').split('/').filter(Boolean).pop()}
+function applyInd(key,silent){
+ curInd=key||null;
+ [].slice.call(document.querySelectorAll('.ichip')).forEach(function(c){c.classList.toggle('on',c.dataset.ind===key)});
+ document.getElementById('iReset').classList.toggle('show',!!key);
+ var d=key?IND[key]:null;
+ heroSub.textContent=d?d.sub:defSub;
+ [].slice.call(document.querySelectorAll('.shot')).forEach(function(s){
+  s.classList.toggle('match',!!(d&&d.match.indexOf(slugOf(s))>-1));
+ });
+ if(!silent){
+  try{key?localStorage.setItem('bb-industry',key):localStorage.removeItem('bb-industry')}catch(e){}
+  bbTrack(key?'industry_selected':'industry_reset',{industry:key||null});
+ }
+}
+[].slice.call(document.querySelectorAll('.ichip')).forEach(function(c){
+ c.addEventListener('click',function(){applyInd(c.dataset.ind===curInd?null:c.dataset.ind)});
+});
+document.getElementById('iReset').addEventListener('click',function(){applyInd(null)});
+try{var savedInd=localStorage.getItem('bb-industry');if(savedInd&&IND[savedInd])applyInd(savedInd,true);}catch(e){}
+
+/* ═══ THE SIXTY SECOND AUDIT: deterministic scoring, honest labels ═══ */
+var AQ=[
+ {q:'How do most new customers find you today?',dim:'m',opts:[['Word of mouth only',0],['Social media, now and then',1],['Steady social plus some search',2],['A planned mix we measure',3]]},
+ {q:'Which is closest to your website situation?',dim:'w',opts:[['We do not have one',0],['It exists but it is outdated',1],['Decent, but it brings no enquiries',2],['It converts visitors into enquiries',3]]},
+ {q:'How does your social media actually run?',dim:'m',opts:[['Quiet for months',0],['We post when we remember',1],['Consistent but no real plan',2],['A strategy with a calendar',3]]},
+ {q:'What happens when an enquiry comes in?',dim:'o',opts:[['Honestly, some slip through',0],['We reply when we can',1],['Same day, usually',2],['Within minutes, and it is tracked',3]]},
+ {q:'How do you follow up with people who did not buy yet?',dim:'o',opts:[['We do not',0],['From memory',1],['A spreadsheet or a notebook',2],['A system chases them for us',3]]},
+ {q:'How do you know if your marketing worked last month?',dim:'m',opts:[['We do not really know',0],['Likes and follower counts',1],['We check a few numbers sometimes',2],['The same report every month',3]]},
+ {q:'How much of your admin is still manual?',dim:'o',opts:[['Nearly all of it',0],['Most of it',1],['Some tools, some paper',2],['Mostly systemised',3]]}
+];
+var ARECS=[
+ 'Build one reliable acquisition channel instead of waiting on referrals.',
+ 'Your website is the leak. A page that converts pays for itself first.',
+ 'Put a strategy and a calendar behind the posting so it sells rather than decorates.',
+ 'Speed to lead. The fastest reply usually wins the job.',
+ 'Follow-up is where money hides. A chase system recovers the quiet leads.',
+ 'Report the same numbers every month so you know what actually worked.',
+ 'Systemise the admin so the team spends its week selling, not typing.'
+];
+var ASVC={m:'Attract: the marketing retainer',w:'Convert: a website that sells',o:'Automate: digital staff'};
+var audBody=document.getElementById('audBody'),audFill=document.getElementById('audFill'),
+    audBack=document.getElementById('audBack'),ans=[],aStep=0,aStarted=false;
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function audRender(i,focus){
+ aStep=i;
+ audFill.style.width=((i/AQ.length)*100)+'%';
+ audBack.classList.toggle('show',i>0);
+ var Q=AQ[i];
+ audBody.innerHTML='<div class="aud-q"><p class="aud-step">Question '+(i+1)+' of '+AQ.length+'</p><h3>'+esc(Q.q)+'</h3>'+
+  '<div class="aud-opts">'+Q.opts.map(function(o,j){return '<button class="aud-opt" data-j="'+j+'">'+esc(o[0])+'</button>'}).join('')+'</div></div>';
+ if(focus){var f=audBody.querySelector('.aud-opt');if(f)f.focus();}
+}
+audBody.addEventListener('click',function(e){
+ var b=e.target.closest('.aud-opt');if(!b)return;
+ if(!aStarted){aStarted=true;bbTrack('audit_started');}
+ ans[aStep]=+AQ[aStep].opts[+b.dataset.j][1];
+ if(aStep+1<AQ.length)audRender(aStep+1,true);else audResult();
+});
+audBack.addEventListener('click',function(){if(aStep>0)audRender(aStep-1,true)});
+function pct(sum,max){return Math.round(sum/max*100)}
+function audResult(){
+ audFill.style.width='100%';
+ audBack.classList.remove('show');
+ var m=0,w=0,o=0;
+ AQ.forEach(function(Q,i){var s=ans[i]||0;if(Q.dim==='m')m+=s;if(Q.dim==='w')w+=s;if(Q.dim==='o')o+=s;});
+ var mp=pct(m,9),wp=pct(w,3),op=pct(o,9);
+ var overall=Math.round((m+w+o)/21*100);
+ var worst=AQ.map(function(Q,i){return [ans[i]||0,i]}).sort(function(a,b){return a[0]-b[0]}).slice(0,3).map(function(x){return x[1]});
+ var pillars={m:mp,w:wp,o:op};
+ var low='m';if(wp<pillars[low])low='w';if(op<pillars[low])low='o';
+ bbTrack('audit_completed',{overall:overall,m:mp,w:wp,o:op,rec:low});
+ audBody.innerHTML='<div class="aud-q">'+
+  '<p class="aud-step">Your indicative growth score</p>'+
+  '<div class="aud-score"><span class="n">'+overall+'</span><span class="of">out of 100</span></div>'+
+  '<div class="aud-bars">'+
+   '<div class="aud-bar"><span>Marketing</span><span class="t"><span class="f" style="width:'+mp+'%"></span></span><b>'+mp+'%</b></div>'+
+   '<div class="aud-bar"><span>Website</span><span class="t"><span class="f" style="width:'+wp+'%"></span></span><b>'+wp+'%</b></div>'+
+   '<div class="aud-bar"><span>Operations</span><span class="t"><span class="f" style="width:'+op+'%"></span></span><b>'+op+'%</b></div>'+
+  '</div>'+
+  '<h3 style="font-size:17px;margin-bottom:12px">Your three biggest gaps</h3>'+
+  '<ul class="aud-recs">'+worst.map(function(i){return '<li>'+esc(ARECS[i])+'</li>'}).join('')+'</ul>'+
+  '<p style="margin-top:18px;font-size:14px;color:var(--muted)">Where we would start: <span class="aud-svc">'+esc(ASVC[low])+'</span></p>'+
+  '<p class="aud-note">An indicative read from seven answers, not a measured result and not a guarantee. The real audit happens in a conversation.</p>'+
+  '<div class="aud-brief">'+
+   '<h3 style="font-size:16px">Send this audit to us, filled in</h3>'+
+   '<div class="ins">'+
+    '<input class="aud-in" id="abName" placeholder="Business name (optional)" maxlength="80" autocomplete="organization">'+
+    '<input class="aud-in" id="abUrl" placeholder="Website, if you have one (optional)" maxlength="120" inputmode="url">'+
+   '</div>'+
+   '<div class="aud-actions">'+
+    '<a class="btn btn-solid" id="abSend" href="#" target="_blank" rel="noopener">Send my audit on WhatsApp</a>'+
+    '<button class="aud-restart" id="abRestart">Start over</button>'+
+   '</div>'+
+  '</div></div>';
+ document.getElementById('abRestart').addEventListener('click',function(){ans=[];aStarted=false;bbTrack('audit_restarted');audRender(0,true)});
+ document.getElementById('abSend').addEventListener('click',function(ev){
+  var nameEl=document.getElementById('abName'),urlEl=document.getElementById('abUrl');
+  var nm=nameEl.value.replace(/[\r\n<>]/g,' ').trim().slice(0,80);
+  var raw=urlEl.value.trim();
+  var site='';
+  urlEl.classList.remove('bad');
+  if(raw){
+   if(!/^https?:\/\//i.test(raw))raw='https://'+raw;
+   if(/^https?:\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}([\/?#][^\s]*)?$/i.test(raw)){site=raw.slice(0,120)}
+   else{urlEl.classList.add('bad');ev.preventDefault();urlEl.focus();return;}
+  }
+  var lines=['Hi Business Booster. I ran the sixty second audit.'];
+  if(nm)lines.push('Business: '+nm);
+  if(curInd)lines.push('Industry: '+curInd);
+  if(site)lines.push('Website: '+site);
+  lines.push('Growth score: '+overall+'/100 (marketing '+mp+'%, website '+wp+'%, operations '+op+'%)');
+  lines.push('Biggest gaps: '+worst.map(function(i,k){return (k+1)+') '+ARECS[i]}).join(' '));
+  lines.push('Recommended start: '+ASVC[low]);
+  lines.push('Can we talk?');
+  this.href='https://wa.me/94767412531?text='+encodeURIComponent(lines.join('\n'));
+  bbTrack('whatsapp_brief_generated',{score:overall,rec:low});
+ });
+}
+audRender(0,false);
+
 var chips=document.getElementById('probChips'),qres=document.getElementById('probResult');
 chips.addEventListener('click',function(e){
  var ch=e.target.closest('.chip');if(!ch)return;
@@ -700,7 +940,7 @@ chips.addEventListener('click',function(e){
  ch.classList.add('on');
  var P=PROBLEMS[ch.dataset.prob];
  qres.style.display='block';
- qres.innerHTML=P.d+'<div class="acts"><a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+encodeURIComponent(P.m)+'">Fix this on WhatsApp</a><a class="btn btn-line" href="'+P.a+'">'+P.al+'</a></div>';
+ qres.innerHTML=P.d+'<div class="acts"><a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+encodeURIComponent(P.m)+'">Fix this on WhatsApp</a><a class="btn btn-line" href="'+P.a+'">'+P.al+'</a></div><a class="go" href="#audit" style="margin-top:14px">Not sure? Take the sixty second audit<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>';
 });
 })();
 </script>
