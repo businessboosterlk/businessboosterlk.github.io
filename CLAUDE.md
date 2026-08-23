@@ -56,6 +56,29 @@ handoff for Claude Code or any other coding agent.
   audit_completed, audit_restarted, whatsapp_brief_generated, whatsapp_cta_clicked,
   project_viewed.
 
+## Rank Yourself hub (added 2026-08-05)
+
+- One section, id stays `audit`. Five tabs: website scan, SEO scan, social quiz,
+  systems quiz, the full sixty second audit. Tabs are `.rtab` chips, panels `.rpanel`.
+- The website and SEO lanes call Google PageSpeed Insights KEYLESS from the browser
+  (`runPagespeed?url=...&strategy=mobile`). Real Lighthouse scores, source stated in
+  the UI, results never invented. KNOWN LIMIT: the keyless quota is a shared public
+  pool and returns 429 for much of the day. The failure path is designed as a
+  conversion: "send us the address, a human runs the report free" on WhatsApp.
+  UPGRADE PATH, needs Thulaib: either a referrer-restricted PSI API key (Google
+  designed these for browser use, restrict to businessboosterlk.github.io) or a
+  Supabase edge function proxy holding the key server-side. Never a bare key.
+- Social and systems lanes are `mountQuiz()` instances (deterministic, self-read,
+  the result says so). The social result offers the human ranking: send a handle,
+  the team scores it against three nearby competitors within a day.
+- Google audit titles are piped through `stripDash()` before rendering so the
+  no-dash rule holds even on Google's own strings.
+- New events: rank_tab, rank_started, rank_completed, scan_started, scan_completed,
+  scan_failed.
+- Browser-pane testing trap: file:// loads cache HARD in the preview pane and can
+  execute a stale script while serving fresh markup. Bust with a query string or
+  verify on the live URL before believing a "broken" result.
+
 ## Future phases (agreed, not built)
 
 - Phase 2: ROI and lost-revenue calculator (label everything an estimate), service

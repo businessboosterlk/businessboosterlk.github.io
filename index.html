@@ -246,6 +246,26 @@ html.js:not(.rm) .ribbon .lane{animation:lane 44s linear infinite}
 .shot.match{border-color:var(--accent)}
 .shot.match .forind{display:inline}
 
+/* ═══ RANK YOURSELF HUB ═══ */
+.rank-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.rp-title{font-size:clamp(18px,2.5vw,23px);font-weight:800;letter-spacing:-.015em}
+.rp-sub{color:var(--muted);font-size:14.5px;margin-top:8px;max-width:58ch}
+.scan-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.scan-row .aud-in{flex:1;min-width:220px}
+.scan-wait{margin-top:22px;border:1px solid var(--line);border-radius:14px;padding:20px}
+.scan-wait .msg{font-size:14.5px;color:var(--muted)}
+.scan-wait .t{height:4px;background:var(--line);border-radius:999px;overflow:hidden;margin-top:14px}
+.scan-wait .f{height:100%;width:0;background:var(--accent);transition:width 1.2s linear}
+.scan-res{margin-top:22px}
+.scan-src{font-size:12px;color:var(--faint);margin-bottom:14px}
+.scan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:700px){.scan-grid{grid-template-columns:repeat(2,1fr)}}
+.scan-cell{border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.scan-cell .n{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.03em;color:var(--accent);font-variant-numeric:tabular-nums}
+.scan-cell .l{display:block;font-size:12px;color:var(--faint);margin-top:4px}
+.scan-fails{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:9px}
+.scan-fails li{border-left:2px solid var(--accent);padding-left:14px;font-size:14px;color:var(--muted)}
+
 /* ═══ 60 SECOND AUDIT ═══ */
 .audit{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:clamp(24px,4vw,40px);max-width:780px}
 .aud-track{height:4px;background:var(--line);border-radius:999px;overflow:hidden;margin-bottom:26px}
@@ -356,7 +376,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
   <a href="#top" class="brand" aria-label="Business Booster home"><img src="assets/logo.png" alt="Business Booster" width="600" height="243"></a>
   <nav class="nav-links" aria-label="Main">
    <a href="#services" data-spy="services">What we do</a>
-   <a href="#audit" data-spy="audit">Free audit</a>
+   <a href="#audit" data-spy="audit">Rank yourself</a>
    <a href="#work" data-spy="work">The work</a>
    <a href="#process" data-spy="process">How it works</a>
    <a href="#about" data-spy="about">About</a>
@@ -387,7 +407,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
  </div>
  <nav aria-label="Menu">
   <a href="#services">What we do</a>
-  <a href="#audit">Free audit</a>
+  <a href="#audit">Rank yourself</a>
   <a href="#work">The work</a>
   <a href="#process">How it works</a>
   <a href="#about">About</a>
@@ -480,14 +500,51 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
 <section class="section" id="audit" style="padding-top:0">
  <div class="wrap">
   <div class="sect-head" data-rv>
-   <p class="eyebrow">The sixty second audit</p>
-   <h2>Find the leak before it costs you.</h2>
-   <p>Seven quick questions about how your business attracts, converts and keeps customers. You get an indicative growth score, your three biggest gaps and the one service that would move the needle first.</p>
+   <p class="eyebrow">Rank yourself</p>
+   <h2>How do you score, honestly?</h2>
+   <p>Pick a lane. The website and SEO scores come straight from Google's own live test on your actual site. The rest you answer in thirty seconds. Every result is an indication, never a verdict.</p>
+  </div>
+  <div class="rank-tabs" data-rv role="tablist" aria-label="Choose what to rank">
+   <button class="chip rtab on" data-tab="web" role="tab" aria-selected="true">My website</button>
+   <button class="chip rtab" data-tab="seo" role="tab" aria-selected="false">My SEO</button>
+   <button class="chip rtab" data-tab="social" role="tab" aria-selected="false">My social media</button>
+   <button class="chip rtab" data-tab="ops" role="tab" aria-selected="false">My systems</button>
+   <button class="chip rtab" data-tab="full" role="tab" aria-selected="false">Everything, 60 seconds</button>
   </div>
   <div class="audit" data-rv id="auditBox">
-   <div class="aud-track" aria-hidden="true"><div class="aud-fill" id="audFill"></div></div>
-   <div id="audBody"><p style="color:var(--muted);font-size:14.5px">The audit runs in your browser and needs JavaScript switched on. If it is not loading, just <a href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20wanted%20the%20growth%20audit.%20Can%20we%20talk%3F" target="_blank" rel="noopener" style="font-weight:700;border-bottom:1px solid var(--line-2)">message us on WhatsApp</a> and we will run it with you.</p></div>
-   <button class="aud-back" id="audBack">&larr; Back</button>
+   <div class="rpanel" id="rp-web">
+    <h3 class="rp-title">Google scores your website, live.</h3>
+    <p class="rp-sub">We send your address to Google PageSpeed Insights and show you exactly what comes back. A mobile test on your real site. Real data, clearly sourced, no opinions.</p>
+    <div class="scan-row">
+     <input class="aud-in" id="scanUrl" placeholder="yourwebsite.lk" maxlength="120" inputmode="url" aria-label="Your website address">
+     <button class="btn btn-solid" id="scanGo">Run Google's test</button>
+    </div>
+    <div id="scanOut" aria-live="polite"></div>
+   </div>
+   <div class="rpanel" id="rp-seo" hidden>
+    <h3 class="rp-title">The technical SEO read, from Google.</h3>
+    <p class="rp-sub">The same live test, focused on what Google flags about your SEO. One honest limit: no outside tool can see your rankings or your traffic. For that part, we look manually.</p>
+    <div class="scan-row">
+     <input class="aud-in" id="scanUrlSeo" placeholder="yourwebsite.lk" maxlength="120" inputmode="url" aria-label="Your website address">
+     <button class="btn btn-solid" id="scanGoSeo">Check my SEO</button>
+    </div>
+    <div id="scanOutSeo" aria-live="polite"></div>
+   </div>
+   <div class="rpanel" id="rp-social" hidden>
+    <div class="aud-track" aria-hidden="true"><div class="aud-fill" data-qfill></div></div>
+    <div data-qbody><p style="color:var(--muted);font-size:14.5px">This quiz needs JavaScript. Or skip it: <a href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20rank%20my%20social%20media%20please." target="_blank" rel="noopener" style="font-weight:700;border-bottom:1px solid var(--line-2)">send us your handle on WhatsApp</a> and a human ranks it within a day.</p></div>
+    <button class="aud-back" data-qback>&larr; Back</button>
+   </div>
+   <div class="rpanel" id="rp-ops" hidden>
+    <div class="aud-track" aria-hidden="true"><div class="aud-fill" data-qfill></div></div>
+    <div data-qbody></div>
+    <button class="aud-back" data-qback>&larr; Back</button>
+   </div>
+   <div class="rpanel" id="rp-full" hidden>
+    <div class="aud-track" aria-hidden="true"><div class="aud-fill" id="audFill"></div></div>
+    <div id="audBody"><p style="color:var(--muted);font-size:14.5px">The audit runs in your browser and needs JavaScript switched on. If it is not loading, just <a href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20wanted%20the%20growth%20audit.%20Can%20we%20talk%3F" target="_blank" rel="noopener" style="font-weight:700;border-bottom:1px solid var(--line-2)">message us on WhatsApp</a> and we will run it with you.</p></div>
+    <button class="aud-back" id="audBack">&larr; Back</button>
+   </div>
   </div>
  </div>
 </section>
@@ -933,6 +990,169 @@ function audResult(){
 }
 audRender(0,false);
 
+/* ═══ RANK YOURSELF: tabs ═══ */
+var RTABS=[].slice.call(document.querySelectorAll('.rtab'));
+function showTab(k){
+ RTABS.forEach(function(t){var on=t.dataset.tab===k;t.classList.toggle('on',on);t.setAttribute('aria-selected',on?'true':'false')});
+ ['web','seo','social','ops','full'].forEach(function(id){document.getElementById('rp-'+id).hidden=(id!==k)});
+ bbTrack('rank_tab',{tab:k});
+}
+RTABS.forEach(function(t){t.addEventListener('click',function(){showTab(t.dataset.tab)})});
+
+/* ═══ RANK YOURSELF: quiz factory (social and systems lanes) ═══ */
+function stripDash(s){return String(s).replace(/[—–]/g,',')}
+function mountQuiz(panel,spec){
+ var body=panel.querySelector('[data-qbody]'),fill=panel.querySelector('[data-qfill]'),back=panel.querySelector('[data-qback]');
+ var st=0,an=[],started=false;
+ function rend(i,focus){
+  st=i;fill.style.width=(i/spec.qs.length*100)+'%';back.classList.toggle('show',i>0);
+  var Q=spec.qs[i];
+  body.innerHTML='<div class="aud-q"><p class="aud-step">Question '+(i+1)+' of '+spec.qs.length+'</p><h3>'+esc(Q.q)+'</h3><div class="aud-opts">'+
+   Q.opts.map(function(o,j){return '<button class="aud-opt" data-j="'+j+'">'+esc(o[0])+'</button>'}).join('')+'</div></div>';
+  if(focus){var f=body.querySelector('.aud-opt');if(f)f.focus();}
+ }
+ function res(){
+  fill.style.width='100%';back.classList.remove('show');
+  var sum=an.reduce(function(a,b){return a+b},0),score=Math.round(sum/(spec.qs.length*3)*100);
+  var worst=an.map(function(s,i){return [s,i]}).sort(function(a,b){return a[0]-b[0]}).slice(0,2).map(function(x){return x[1]});
+  bbTrack('rank_completed',{lane:spec.key,score:score});
+  body.innerHTML='<div class="aud-q"><p class="aud-step">'+esc(spec.label)+', indicative score</p>'+
+   '<div class="aud-score"><span class="n">'+score+'</span><span class="of">out of 100</span></div>'+
+   '<h3 style="font-size:17px;margin:16px 0 12px">Where it leaks</h3>'+
+   '<ul class="aud-recs">'+worst.map(function(i){return '<li>'+esc(spec.qs[i].rec)+'</li>'}).join('')+'</ul>'+
+   '<p class="aud-note">'+esc(spec.note)+'</p>'+spec.extraHtml+
+   '<div class="aud-actions"><a class="btn btn-solid" data-send href="#" target="_blank" rel="noopener">'+esc(spec.cta)+'</a><button class="aud-restart" data-restart>Start over</button></div></div>';
+  body.querySelector('[data-restart]').addEventListener('click',function(){an=[];started=false;rend(0,true)});
+  body.querySelector('[data-send]').addEventListener('click',function(){
+   var exEl=body.querySelector('[data-extra]');
+   var exVal=exEl?exEl.value.replace(/[\r\n<>]/g,' ').trim().slice(0,60):'';
+   var lines=[spec.msg0];
+   if(exVal)lines.push(spec.extraLabel+': '+exVal);
+   if(curInd)lines.push('Industry: '+curInd);
+   lines.push('Score: '+score+'/100');
+   lines.push('Gaps: '+worst.map(function(i,k){return (k+1)+') '+spec.qs[i].rec}).join(' '));
+   lines.push('Can we talk?');
+   this.href='https://wa.me/94767412531?text='+encodeURIComponent(lines.join('\n'));
+   bbTrack('whatsapp_brief_generated',{lane:spec.key,score:score});
+  });
+ }
+ body.addEventListener('click',function(e){
+  var b=e.target.closest('.aud-opt');if(!b)return;
+  if(!started){started=true;bbTrack('rank_started',{lane:spec.key});}
+  an[st]=+spec.qs[st].opts[+b.dataset.j][1];
+  if(st+1<spec.qs.length)rend(st+1,true);else res();
+ });
+ back.addEventListener('click',function(){if(st>0)rend(st-1,true)});
+ rend(0,false);
+}
+mountQuiz(document.getElementById('rp-social'),{
+ key:'social',label:'Social media',cta:'Send my score on WhatsApp',
+ msg0:'Hi Business Booster. I ranked my social media on your site.',extraLabel:'Handle',
+ note:'A self-read of your habits, not platform data. Nobody outside the platforms can scan your account numbers without access, and anyone who claims to is guessing.',
+ extraHtml:'<div class="ins" style="grid-template-columns:1fr"><input class="aud-in" data-extra placeholder="Your Instagram or page name (optional)" maxlength="60"></div><p class="aud-note">Want the real ranking? Send the handle and a human on our team scores your profile against three nearby competitors within a day. No charge and no obligation.</p>',
+ qs:[
+  {q:'How often do you actually post?',rec:'Consistency beats brilliance. A weekly rhythm is the floor.',opts:[['Rarely, honestly',0],['A burst, then quiet',1],['Most weeks',2],['To a calendar, every week',3]]},
+  {q:'Is there a plan behind the posting?',rec:'Posting without a plan is decoration. Pillars and a calendar give it a job.',opts:[['We post what comes up',0],['A rough theme',1],['A monthly plan, loosely followed',2],['A strategy tied to sales',3]]},
+  {q:'How much of it is video?',rec:'Video carries reach in Sri Lanka right now. It needs to lead, not guest.',opts:[['None',0],['The odd one',1],['Some reels most months',2],['Video leads our content',3]]},
+  {q:'Do you put money behind the good posts?',rec:'Organic alone caps out. Small, tracked boosts move the winners.',opts:[['Never',0],['We boost randomly',1],['Regular small boosts',2],['Planned campaigns with tracking',3]]},
+  {q:'Do you know what it achieved last month?',rec:'If it is not measured monthly, it cannot be managed.',opts:[['No idea',0],['Likes and follower counts',1],['We glance at reach',2],['The same report every month',3]]}
+ ]
+});
+mountQuiz(document.getElementById('rp-ops'),{
+ key:'ops',label:'Systems',cta:'Send my score on WhatsApp',
+ msg0:'Hi Business Booster. I ranked my business systems on your site.',extraLabel:'Business',
+ note:'An indication from four answers. The real read takes one conversation about how work actually moves through your business.',
+ extraHtml:'',
+ qs:[
+  {q:'What happens when an enquiry comes in?',rec:'Speed to lead. The fastest reply usually wins the job.',opts:[['Some slip through, honestly',0],['We reply when we can',1],['Same day, usually',2],['Within minutes, and tracked',3]]},
+  {q:'Who chases the people who went quiet?',rec:'Follow-up is where money hides. A system never forgets.',opts:[['Nobody',0],['Whoever remembers',1],['A spreadsheet reminds us',2],['A system chases automatically',3]]},
+  {q:'How are payments and fees tracked?',rec:'Money tracked by memory leaks. A ledger with reminders does not.',opts:[['Memory and messages',0],['A notebook',1],['Spreadsheets',2],['A system with reminders',3]]},
+  {q:'How much of the weekly admin is manual?',rec:'Systemise the admin so the team spends its week selling, not typing.',opts:[['Nearly all of it',0],['Most of it',1],['Some tools, some paper',2],['Mostly systemised',3]]}
+ ]
+});
+
+/* ═══ RANK YOURSELF: the real Google scan (PageSpeed Insights, keyless, no secrets) ═══ */
+var scanCache={};
+function normUrl(raw){
+ raw=(raw||'').trim();
+ if(!raw)return null;
+ if(!/^https?:\/\//i.test(raw))raw='https://'+raw;
+ return /^https?:\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}([\/?#][^\s]*)?$/i.test(raw)?raw.slice(0,200):null;
+}
+function runScan(mode){
+ var inEl=document.getElementById(mode==='web'?'scanUrl':'scanUrlSeo');
+ var out=document.getElementById(mode==='web'?'scanOut':'scanOutSeo');
+ var url=normUrl(inEl.value);
+ inEl.classList.toggle('bad',!url);
+ if(!url){inEl.focus();return;}
+ bbTrack('scan_started',{mode:mode});
+ out.innerHTML='<div class="scan-wait"><p class="msg" data-m>Asking Google to load your site on a mid-range phone. Give it half a minute.</p><div class="t"><div class="f" data-f></div></div></div>';
+ var f=out.querySelector('[data-f]'),msgEl=out.querySelector('[data-m]');
+ var msgs=['Google is loading the page on a simulated phone...','Measuring speed, layout shifts and tap targets...','Running the SEO and accessibility checks...','Nearly done, packaging the report...'];
+ var mi=-1;
+ var tick=setInterval(function(){mi=Math.min(mi+1,msgs.length-1);msgEl.textContent=msgs[mi];f.style.width=Math.min(88,18+mi*20)+'%';},6000);
+ f.style.width='10%';
+ var api='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+encodeURIComponent(url)+
+  '&strategy=mobile&category=PERFORMANCE&category=SEO&category=ACCESSIBILITY&category=BEST_PRACTICES';
+ var ctrl=('AbortController' in window)?new AbortController():null;
+ var to=setTimeout(function(){if(ctrl)ctrl.abort()},75000);
+ (scanCache[url]?Promise.resolve(scanCache[url]):fetch(api,ctrl?{signal:ctrl.signal}:{}).then(function(r){
+   if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}))
+ .then(function(d){
+  scanCache[url]=d;clearTimeout(to);clearInterval(tick);
+  renderScan(mode,out,url,d);bbTrack('scan_completed',{mode:mode});
+ })
+ .catch(function(){
+  clearTimeout(to);clearInterval(tick);bbTrack('scan_failed',{mode:mode});
+  out.innerHTML='<div class="scan-wait"><p class="msg"><b>Google would not run the test just now.</b> That happens when the free service is busy or the address does not load. Send us the address and a human runs the full report for you, no charge.</p>'+
+   '<div class="aud-actions" style="margin-top:14px"><a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+
+   encodeURIComponent('Hi Business Booster. Please run a website report on '+url+' for me.')+'">Ask us to run it</a></div></div>';
+ });
+}
+function renderScan(mode,out,url,d){
+ var lr=d.lighthouseResult||{},cats=lr.categories||{},audits=lr.audits||{};
+ function sc(k){var c=cats[k];return (c&&typeof c.score==='number')?Math.round(c.score*100):null}
+ function fails(cat,n){
+  var c=cats[cat];if(!c)return[];
+  return (c.auditRefs||[]).filter(function(r){var a=audits[r.id];
+    return a&&typeof a.score==='number'&&a.score<0.9&&(r.weight||0)>0})
+   .sort(function(x,y){return (y.weight||0)-(x.weight||0)}).slice(0,n)
+   .map(function(r){return stripDash(audits[r.id].title)});
+ }
+ var P=sc('performance'),S=sc('seo'),A=sc('accessibility'),B=sc('best-practices');
+ var src='<p class="scan-src">Scores from Google PageSpeed Insights, mobile test, run just now on '+esc(url)+'. Google\'s numbers, shown as received.</p>';
+ var html;
+ if(mode==='web'){
+  var list=fails('performance',4).concat(fails('seo',2));
+  html='<div class="scan-res">'+src+
+   '<div class="scan-grid">'+
+    '<div class="scan-cell"><span class="n">'+(P===null?'?':P)+'</span><span class="l">Speed</span></div>'+
+    '<div class="scan-cell"><span class="n">'+(S===null?'?':S)+'</span><span class="l">SEO basics</span></div>'+
+    '<div class="scan-cell"><span class="n">'+(A===null?'?':A)+'</span><span class="l">Accessibility</span></div>'+
+    '<div class="scan-cell"><span class="n">'+(B===null?'?':B)+'</span><span class="l">Best practice</span></div>'+
+   '</div>'+
+   (list.length?'<h3 style="font-size:16px;margin:20px 0 0">What Google flagged</h3><ul class="scan-fails">'+list.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul>':'')+
+   '<p class="aud-note">A lab test of one page, not a full audit. Numbers vary run to run. What it cannot see: your rankings, your traffic or whether the page actually sells.</p>';
+ }else{
+  var list2=fails('seo',6);
+  html='<div class="scan-res">'+src+
+   '<div class="aud-score"><span class="n">'+(S===null?'?':S)+'</span><span class="of">technical SEO, out of 100</span></div>'+
+   (list2.length?'<h3 style="font-size:16px;margin:18px 0 0">What Google flagged</h3><ul class="scan-fails">'+list2.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul>':'<p style="margin-top:16px;color:var(--muted);font-size:14.5px">Google found no technical SEO faults on this page. The next questions are rankings and content, which need a manual look.</p>')+
+   '<p class="aud-note">Technical checks on one page only. Rankings, traffic and content quality are invisible from outside. That part of the audit is human work, and we do it free.</p>';
+ }
+ var msg='Hi Business Booster. Google just scored my site on your page.\nWebsite: '+url+
+  '\nSpeed '+(P===null?'na':P)+'/100, SEO '+(S===null?'na':S)+'/100, Accessibility '+(A===null?'na':A)+'/100, Best practice '+(B===null?'na':B)+'/100'+
+  (curInd?'\nIndustry: '+curInd:'')+'\nCan you go through it with me?';
+ html+='<div class="aud-actions" style="margin-top:18px"><a class="btn btn-solid" data-scansend target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+encodeURIComponent(msg)+'">Go through this with us</a><button class="aud-restart" data-again>Scan another site</button></div></div>';
+ out.innerHTML=html;
+ out.querySelector('[data-again]').addEventListener('click',function(){out.innerHTML='';});
+ out.querySelector('[data-scansend]').addEventListener('click',function(){bbTrack('whatsapp_brief_generated',{lane:mode,url:url})});
+}
+document.getElementById('scanGo').addEventListener('click',function(){runScan('web')});
+document.getElementById('scanGoSeo').addEventListener('click',function(){runScan('seo')});
+document.getElementById('scanUrl').addEventListener('keydown',function(e){if(e.key==='Enter')runScan('web')});
+document.getElementById('scanUrlSeo').addEventListener('keydown',function(e){if(e.key==='Enter')runScan('seo')});
+
 var chips=document.getElementById('probChips'),qres=document.getElementById('probResult');
 chips.addEventListener('click',function(e){
  var ch=e.target.closest('.chip');if(!ch)return;
@@ -940,7 +1160,7 @@ chips.addEventListener('click',function(e){
  ch.classList.add('on');
  var P=PROBLEMS[ch.dataset.prob];
  qres.style.display='block';
- qres.innerHTML=P.d+'<div class="acts"><a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+encodeURIComponent(P.m)+'">Fix this on WhatsApp</a><a class="btn btn-line" href="'+P.a+'">'+P.al+'</a></div><a class="go" href="#audit" style="margin-top:14px">Not sure? Take the sixty second audit<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>';
+ qres.innerHTML=P.d+'<div class="acts"><a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/94767412531?text='+encodeURIComponent(P.m)+'">Fix this on WhatsApp</a><a class="btn btn-line" href="'+P.a+'">'+P.al+'</a></div><a class="go" href="#audit" style="margin-top:14px">Not sure? Rank yourself in sixty seconds<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>';
 });
 })();
 </script>
