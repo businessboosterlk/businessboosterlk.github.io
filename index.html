@@ -276,6 +276,9 @@ html.js:not(.rm) .ribbon .lane{animation:lane 44s linear infinite}
 .aud-opt{text-align:left;border:1px solid var(--line-2);border-radius:12px;padding:14px 17px;font-size:14.5px;
  font-weight:600;color:var(--ink);transition:border-color .2s,transform .2s var(--ease)}
 .aud-opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.aud-opts.rate{grid-template-columns:repeat(5,1fr);gap:8px}
+.aud-opts.rate .aud-opt{text-align:center;padding:13px 6px;font-weight:700}
+.rate-ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px}
 .aud-back{margin-top:18px;font-size:13px;font-weight:600;color:var(--faint);display:none}
 .aud-back.show{display:inline-block}
 .aud-score{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
@@ -507,7 +510,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
   <div class="rank-tabs" data-rv role="tablist" aria-label="Choose what to rank">
    <button class="chip rtab on" data-tab="web" role="tab" aria-selected="true">My website</button>
    <button class="chip rtab" data-tab="seo" role="tab" aria-selected="false">My SEO</button>
-   <button class="chip rtab" data-tab="social" role="tab" aria-selected="false">My social media</button>
+   <button class="chip rtab" data-tab="social" role="tab" aria-selected="false">My marketing</button>
    <button class="chip rtab" data-tab="ops" role="tab" aria-selected="false">My systems</button>
    <button class="chip rtab" data-tab="full" role="tab" aria-selected="false">Everything, 60 seconds</button>
   </div>
@@ -1024,14 +1027,15 @@ function mountQuiz(panel,spec){
  function rend(i,focus){
   st=i;fill.style.width=(i/spec.qs.length*100)+'%';back.classList.toggle('show',i>0);
   var Q=spec.qs[i];
-  body.innerHTML='<div class="aud-q"><p class="aud-step">Question '+(i+1)+' of '+spec.qs.length+'</p><h3>'+esc(Q.q)+'</h3><div class="aud-opts">'+
-   Q.opts.map(function(o,j){return '<button class="aud-opt" data-j="'+j+'">'+esc(o[0])+'</button>'}).join('')+'</div></div>';
+  body.innerHTML='<div class="aud-q"><p class="aud-step">Question '+(i+1)+' of '+spec.qs.length+'</p><h3>'+esc(Q.q)+'</h3><div class="aud-opts'+(Q.rate?' rate':'')+'">'+
+   Q.opts.map(function(o,j){return '<button class="aud-opt" data-j="'+j+'">'+esc(o[0])+'</button>'}).join('')+'</div>'+
+   (Q.rate?'<div class="rate-ends" aria-hidden="true"><span>Being honest, weak</span><span>Genuinely strong</span></div>':'')+'</div>';
   if(focus){var f=body.querySelector('.aud-opt');if(f)f.focus();}
  }
  function res(){
   fill.style.width='100%';back.classList.remove('show');
   var sum=an.reduce(function(a,b){return a+b},0),score=Math.round(sum/(spec.qs.length*3)*100);
-  var worst=an.map(function(s,i){return [s,i]}).sort(function(a,b){return a[0]-b[0]}).slice(0,2).map(function(x){return x[1]});
+  var worst=an.map(function(s,i){return [s,i]}).sort(function(a,b){return a[0]-b[0]}).slice(0,spec.gaps||2).map(function(x){return x[1]});
   bbTrack('rank_completed',{lane:spec.key,score:score});
   body.innerHTML='<div class="aud-q"><p class="aud-step">'+esc(spec.label)+', indicative score</p>'+
    '<div class="aud-score"><span class="n">'+score+'</span><span class="of">out of 100</span></div>'+
@@ -1063,16 +1067,19 @@ function mountQuiz(panel,spec){
  rend(0,false);
 }
 mountQuiz(document.getElementById('rp-social'),{
- key:'social',label:'Social media',cta:'Send my score on WhatsApp',
- msg0:'Hi Business Booster. I ranked my social media on your site.',extraLabel:'Handle',
- note:'A self-read of your habits, not platform data. Nobody outside the platforms can scan your account numbers without access, and anyone who claims to is guessing.',
+ key:'marketing',label:'Marketing',cta:'Send my score on WhatsApp',gaps:3,
+ msg0:'Hi Business Booster. I ranked my marketing on your site.',extraLabel:'Handle',
+ note:'A self-read of your marketing maturity, not platform data. Nobody outside the platforms can scan your account numbers without access, and anyone who claims to is guessing.',
  extraHtml:'<div class="ins" style="grid-template-columns:1fr"><input class="aud-in" data-extra placeholder="Your Instagram or page name (optional)" maxlength="60"></div><p class="aud-note">Want the real ranking? Send the handle and a human on our team scores your profile against three nearby competitors within a day. No charge and no obligation.</p>',
  qs:[
-  {q:'How often do you actually post?',rec:'Consistency beats brilliance. A weekly rhythm is the floor.',opts:[['Rarely, honestly',0],['A burst, then quiet',1],['Most weeks',2],['To a calendar, every week',3]]},
-  {q:'Is there a plan behind the posting?',rec:'Posting without a plan is decoration. Pillars and a calendar give it a job.',opts:[['We post what comes up',0],['A rough theme',1],['A monthly plan, loosely followed',2],['A strategy tied to sales',3]]},
-  {q:'How much of it is video?',rec:'Video carries reach in Sri Lanka right now. It needs to lead, not guest.',opts:[['None',0],['The odd one',1],['Some reels most months',2],['Video leads our content',3]]},
-  {q:'Do you put money behind the good posts?',rec:'Organic alone caps out. Small, tracked boosts move the winners.',opts:[['Never',0],['We boost randomly',1],['Regular small boosts',2],['Planned campaigns with tracking',3]]},
-  {q:'Do you know what it achieved last month?',rec:'If it is not measured monthly, it cannot be managed.',opts:[['No idea',0],['Likes and follower counts',1],['We glance at reach',2],['The same report every month',3]]}
+  {q:'Do you know exactly who your ideal customer is?',rec:'Without a written ideal customer, every post and every rupee is aimed at everyone, which is nobody.',opts:[['Never really thought about it',0],['A rough sense, in our heads',1],['Written down once, never used',2],['A written profile the whole team sells to',3]]},
+  {q:'Do you plan the year in quarters?',rec:'Quarter plans with numbers turn marketing from activity into a campaign with a scoreboard.',opts:[['We run week to week',0],['A yearly wish list',1],['Loose quarterly goals',2],['Quarterly plans with numbers we review',3]]},
+  {q:'Is there a written marketing strategy?',rec:'Strategy comes first. Content without one is decoration, however good it looks.',opts:[['No',0],['In the owner\'s head',1],['A document nobody opens',2],['A strategy the content actually follows',3]]},
+  {q:'Rate your social media presence, honestly.',rate:true,rec:'A presence you rate below four is costing attention every single day. Consistency and a plan lift it fastest.',opts:[['1',0],['2',0.75],['3',1.5],['4',2.25],['5',3]]},
+  {q:'Rate the videos you put out.',rate:true,rec:'Video carries reach in Sri Lanka right now. Weak video, or none, caps everything else you post.',opts:[['1',0],['2',0.75],['3',1.5],['4',2.25],['5',3]]},
+  {q:'Rate the design of your posts.',rate:true,rec:'Design is the first trust signal. Posts that look homemade price you as homemade.',opts:[['1',0],['2',0.75],['3',1.5],['4',2.25],['5',3]]},
+  {q:'Do you put money behind the good posts?',rec:'Organic alone caps out. Small, tracked boosts move the winners further.',opts:[['Never',0],['We boost randomly',1],['Regular small boosts',2],['Planned campaigns with tracking',3]]},
+  {q:'Do you know what marketing achieved last month?',rec:'If it is not measured monthly, it cannot be managed.',opts:[['No idea',0],['Likes and follower counts',1],['We glance at reach',2],['The same report every month',3]]}
  ]
 });
 mountQuiz(document.getElementById('rp-ops'),{
