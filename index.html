@@ -143,7 +143,38 @@ html.cap .scrollcue{display:none}
 body.drawer-lock{position:fixed;width:100%}
 
 /* ═══ HERO ═══ */
-.hero{min-height:92svh;display:flex;align-items:center;position:relative;overflow:hidden;padding:90px 0 70px}
+.hero{position:relative;overflow:hidden;padding:clamp(84px,10vw,130px) 0 56px}
+/* ═══ THE GROWTH FACTORY ═══ */
+.factory{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+ background:#0b0b0d;margin-top:clamp(36px,5vw,56px)}
+.factory .img-wrap{position:relative;overflow:hidden}
+.factory img{width:100%;height:auto;aspect-ratio:1600/900;object-fit:cover;display:block}
+.factory .beam{position:absolute;top:0;bottom:0;left:var(--fx,20%);width:24%;transform:translateX(-50%);
+ background:radial-gradient(50% 60% at 50% 55%,rgba(255,92,38,.28),transparent 70%);
+ pointer-events:none;transition:left 1s var(--ease)}
+html.rm .factory .beam{transition:none}
+.factory .tag{position:absolute;top:14px;font-size:10.5px;font-weight:700;letter-spacing:.12em;
+ text-transform:uppercase;color:rgba(242,239,233,.85);background:rgba(11,11,13,.72);
+ border:1px solid rgba(242,239,233,.18);border-radius:999px;padding:6px 12px;backdrop-filter:blur(6px)}
+.factory .tag.in{left:14px}
+.factory .tag.outt{right:14px}
+.stage-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(242,239,233,.14);
+ background:rgba(11,11,13,.9)}
+.stage-btn{position:relative;padding:16px 6px 14px;text-align:center;font-size:11px;font-weight:700;
+ letter-spacing:.1em;text-transform:uppercase;color:rgba(242,239,233,.5);transition:color .25s}
+.stage-btn::before{content:"";display:block;width:8px;height:8px;border-radius:50%;margin:0 auto 8px;
+ background:rgba(242,239,233,.25);transition:background .25s,box-shadow .25s}
+.stage-btn[aria-selected="true"]{color:#f2efe9}
+.stage-btn[aria-selected="true"]::before{background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.stage-btn:hover{color:#f2efe9}
+.factory-caption{padding:22px clamp(16px,3vw,30px) 24px;background:rgba(11,11,13,.9);color:#f2efe9}
+.factory-caption .k{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.factory-caption h3{font-size:clamp(18px,2.4vw,23px);font-weight:800;letter-spacing:-.015em;margin-top:6px}
+.factory-caption p{font-size:14px;color:rgba(242,239,233,.66);margin-top:6px;max-width:60ch}
+.factory-caption .note{font-size:11.5px;color:rgba(242,239,233,.4);margin-top:12px}
+@media(max-width:640px){
+ .stage-btn{font-size:9px;letter-spacing:.06em;padding:12px 3px 10px}
+}
 .hero-mark{position:absolute;right:-4%;top:14%;width:min(46vw,560px);opacity:.05;pointer-events:none;
  filter:var(--logo-filter);will-change:transform}
 .hero h1{font-size:clamp(42px,7.8vw,94px);font-weight:800;letter-spacing:-.035em;line-height:1.02;max-width:13ch}
@@ -426,30 +457,60 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
  <div class="wrap">
   <p class="eyebrow">Growth agency &middot; Colombo, Sri Lanka</p>
   <h1 style="margin-top:18px">
-   <span class="w"><span class="wi" style="--i:0">What</span></span>
-   <span class="w"><span class="wi" style="--i:1">is</span></span>
-   <span class="w"><span class="wi" style="--i:2"><em>slowing</em></span></span>
-   <span class="w"><span class="wi" style="--i:3">your</span></span>
-   <span class="w"><span class="wi" style="--i:4">business</span></span>
-   <span class="w"><span class="wi" style="--i:5">down?</span></span>
+   <span class="w"><span class="wi" style="--i:0">Is</span></span>
+   <span class="w"><span class="wi" style="--i:1">your</span></span>
+   <span class="w"><span class="wi" style="--i:2">social</span></span>
+   <span class="w"><span class="wi" style="--i:3">media</span></span>
+   <span class="w"><span class="wi" style="--i:4">a</span></span>
+   <span class="w"><span class="wi" style="--i:5"><em>revenue</em></span></span>
+   <span class="w"><span class="wi" style="--i:6"><em>stream</em></span></span>
+   <span class="w"><span class="wi" style="--i:7">for</span></span>
+   <span class="w"><span class="wi" style="--i:8">your</span></span>
+   <span class="w"><span class="wi" style="--i:9">business?</span></span>
   </h1>
-  <p class="sub" id="heroSub">Pick the problem. We will show you how we fix it, with live work as the proof. We build for 20+ Sri Lankan businesses and everything on this page is real.</p>
-  <div class="chips hero-chips" id="probChips">
+  <p class="sub" id="heroSub">Enter with scattered activity. Leave with one connected commercial path across strategy, content, enquiries, follow-up and digital systems. This is the factory.</p>
+  <div class="ctas">
+   <a class="btn btn-solid" href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20saw%20your%20site%20and%20I%20want%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.74 1.2c5.46 0 9.9-4.43 9.9-9.9 0-5.45-4.44-9.9-9.9-9.9zm5.8 14.02c-.24.68-1.4 1.3-1.94 1.34-.5.05-1.13.24-3.7-.78-3.12-1.23-5.1-4.4-5.26-4.6-.15-.2-1.25-1.66-1.25-3.17 0-1.5.79-2.24 1.07-2.55.28-.3.6-.38.8-.38.2 0 .4 0 .58.01.19.01.44-.07.68.53.24.6.83 2.08.9 2.23.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.32.39-.45.52-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.07 1.31 2.37 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.7.8 2 .95.29.15.48.22.55.34.07.12.07.7-.17 1.38z"/></svg>
+    Talk to us on WhatsApp</a>
+   <a class="btn btn-line" href="#checkup">Test your business</a>
+  </div>
+  <p class="fact"><span class="dot"></span>Replies come from the team that does the work, not a call centre.</p>
+  <div class="factory" data-rv>
+   <div class="img-wrap">
+    <img src="assets/growth-factory.jpg" width="1600" height="900" alt="Concept render of the Business Booster growth factory: five glass chambers holding a lens, a chess piece, a film reel, a speech bubble and a stack of coins, a grey figure entering on the left and a glowing figure leaving on the right" loading="eager" fetchpriority="high">
+    <span class="beam" id="fBeam" aria-hidden="true"></span>
+    <span class="tag in">Before Business Booster</span>
+    <span class="tag outt">After Business Booster</span>
+   </div>
+   <div class="stage-rail" role="tablist" aria-label="The five stages of the growth factory">
+    <button class="stage-btn" data-stage="0" role="tab" aria-selected="true">Diagnose</button>
+    <button class="stage-btn" data-stage="1" role="tab" aria-selected="false">Direct</button>
+    <button class="stage-btn" data-stage="2" role="tab" aria-selected="false">Create</button>
+    <button class="stage-btn" data-stage="3" role="tab" aria-selected="false">Convert</button>
+    <button class="stage-btn" data-stage="4" role="tab" aria-selected="false">Revenue path</button>
+   </div>
+   <div class="factory-caption" aria-live="polite">
+    <p class="k" id="fKicker">Diagnose</p>
+    <h3 id="fTitle">Find the real bottleneck.</h3>
+    <p id="fCopy">It starts with an honest read of what is holding attention, enquiries or follow-up back. Direction before noise.</p>
+    <p class="note">Concept render of our own process. The system gives the work direction. It never guarantees a commercial result.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section style="padding:clamp(44px,6vw,64px) 0" id="pick">
+ <div class="wrap">
+  <p class="eyebrow" data-rv>Where does it hurt?</p>
+  <div class="chips hero-chips" id="probChips" data-rv>
    <button class="chip" data-prob="sales">We need more sales</button>
    <button class="chip" data-prob="invisible">Nobody finds us online</button>
    <button class="chip" data-prob="website">The website lets us down</button>
    <button class="chip" data-prob="admin">Too much manual admin</button>
   </div>
   <div class="qresult hero-result" id="probResult" aria-live="polite"></div>
-  <div class="ctas">
-   <a class="btn btn-solid" href="https://wa.me/94767412531?text=Hi%20Business%20Booster%2C%20I%20saw%20your%20site%20and%20I%20want%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.74 1.2c5.46 0 9.9-4.43 9.9-9.9 0-5.45-4.44-9.9-9.9-9.9zm5.8 14.02c-.24.68-1.4 1.3-1.94 1.34-.5.05-1.13.24-3.7-.78-3.12-1.23-5.1-4.4-5.26-4.6-.15-.2-1.25-1.66-1.25-3.17 0-1.5.79-2.24 1.07-2.55.28-.3.6-.38.8-.38.2 0 .4 0 .58.01.19.01.44-.07.68.53.24.6.83 2.08.9 2.23.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.32.39-.45.52-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.07 1.31 2.37 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.7.8 2 .95.29.15.48.22.55.34.07.12.07.7-.17 1.38z"/></svg>
-    Talk to us on WhatsApp</a>
-   <a class="btn btn-line" href="#work">See the work</a>
-  </div>
-  <p class="fact"><span class="dot"></span>Replies come from the team that does the work, not a call centre.</p>
  </div>
- <div class="scrollcue">Scroll</div>
 </section>
 
 <div class="ribbon" aria-hidden="true"><div class="lane" id="ribbonLane"></div></div>
@@ -845,6 +906,43 @@ if(matchMedia('(pointer:fine)').matches&&!RM){
   });
   b.addEventListener('mouseleave',function(){b.style.transform='';});
  });
+}
+
+/* ═══ THE GROWTH FACTORY: five stages, one moving current ═══ */
+var FSTAGES=[
+ {k:'Diagnose',t:'Find the real bottleneck.',c:'It starts with an honest read of what is holding attention, enquiries or follow-up back. Direction before noise.',x:20},
+ {k:'Direct',t:'Choose what moves first.',c:'One commercial priority, a written strategy and every useful action placed in a clear order.',x:35},
+ {k:'Create',t:'Make content with a job.',c:'Posts, films and campaigns built to earn the right attention and make the next action obvious.',x:50},
+ {k:'Convert',t:'Turn attention into enquiry.',c:'Social activity connects to a website, a conversation or a sales handoff that somebody owns.',x:65},
+ {k:'Revenue path',t:'Keep the opportunity moving.',c:'Follow-up and measurement keep every enquiry alive. The system never forgets, and it never pretends an outcome is guaranteed.',x:80}
+];
+var fBeam=document.getElementById('fBeam'),fKicker=document.getElementById('fKicker'),
+    fTitle=document.getElementById('fTitle'),fCopy=document.getElementById('fCopy'),
+    fBtns=[].slice.call(document.querySelectorAll('.stage-btn')),
+    fIdx=0,fManualUntil=0;
+function fSelect(i,manual){
+ fIdx=i;
+ var S=FSTAGES[i];
+ fBtns.forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false');b.tabIndex=j===i?0:-1;});
+ fBeam.style.left=S.x+'%';
+ fKicker.textContent=S.k;fTitle.textContent=S.t;fCopy.textContent=S.c;
+ if(manual){fManualUntil=Date.now()+9000;bbTrack('factory_stage',{stage:S.k});}
+}
+fBtns.forEach(function(b,i){
+ b.addEventListener('click',function(){fSelect(i,true)});
+ b.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'){fSelect(Math.min(4,fIdx+1),true);fBtns[fIdx].focus();e.preventDefault();}
+  if(e.key==='ArrowLeft'){fSelect(Math.max(0,fIdx-1),true);fBtns[fIdx].focus();e.preventDefault();}
+ });
+});
+if(!RM){
+ setInterval(function(){
+  if(Date.now()<fManualUntil)return;
+  var fEl=document.querySelector('.factory');
+  var r=fEl.getBoundingClientRect();
+  if(r.bottom<0||r.top>window.innerHeight)return;
+  fSelect((fIdx+1)%FSTAGES.length,false);
+ },4500);
 }
 
 /* problem picker: deterministic diagnosis, routed to the right arm plus WhatsApp */
