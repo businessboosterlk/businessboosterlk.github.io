@@ -524,7 +524,7 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
     <p class="k" id="fKicker">Diagnose</p>
     <h3 id="fTitle">Find the real bottleneck.</h3>
     <p id="fCopy">It starts with an honest read of what is holding attention, enquiries or follow-up back. Direction before noise.</p>
-    <p class="note">This is our operating system, drawn live in code. It gives the work direction. It never guarantees a commercial result.</p>
+    <p class="note">The grey sparks falling away are the customers a business loses between click and sale. The five stages exist to stop that. Drawn live in code, and honest: a system gives the work direction, it never guarantees a result.</p>
    </div>
   </div>
  </div>
@@ -1000,6 +1000,11 @@ if(!RM){
   p.v=0.5+Math.random()*0.8;
   p.seed=Math.random()*1000;
   p.sz=1+Math.random()*1.5;
+  /* the leak: some never make it. Most doom points land early, none late.
+     This is the honest version of the dripping funnel: losses happen between
+     click and sale, and the gates exist to stop them. */
+  p.doomX=Math.random()<0.42?W*(0.06+Math.pow(Math.random(),2.2)*0.55):-1;
+  p.fall=0;p.dead=0;
  }
  for(var i=0;i<N;i++){var p={};spawn(p,true);P.push(p);}
  var t=0;
@@ -1017,6 +1022,17 @@ if(!RM){
   }
   for(var j=0;j<P.length;j++){
    var q=P[j];
+   if(q.doomX>0&&q.x>q.doomX){
+    q.fall+=0.08;
+    q.y+=q.fall;
+    q.x+=q.v*0.4;
+    q.dead+=0.02;
+    var fo=Math.max(0,0.3-q.dead);
+    if(fo<=0||q.y>H+8){spawn(q,false);continue;}
+    ctx.fillStyle='rgba(150,150,158,'+fo.toFixed(3)+')';
+    ctx.beginPath();ctx.arc(q.x,q.y,q.sz,0,6.283);ctx.fill();
+    continue;
+   }
    var prog=Math.max(0,Math.min(1,(q.x/W-0.06)/0.86));
    var chaos=Math.pow(1-prog,1.6);
    var braid=Math.sin(q.x*0.025+q.seed)*H*(0.012+0.055*(1-prog));
