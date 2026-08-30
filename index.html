@@ -150,49 +150,36 @@ body.drawer-lock{position:fixed;width:100%}
 .factory .img-wrap{position:relative;overflow:hidden;background:
  radial-gradient(90% 120% at 50% -10%,#1c1c22,#0b0b0d 60%);
  padding:clamp(40px,6vw,72px) clamp(16px,3vw,40px) clamp(34px,5vw,60px)}
-.fscene{position:relative;height:clamp(300px,36vw,430px);max-width:1080px;margin:0 auto}
-#fCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.chamber{position:absolute;top:50%;left:var(--gx);transform:translate(-50%,-50%);
- width:clamp(46px,5.6vw,68px);height:clamp(46px,5.6vw,68px);border-radius:50%;display:grid;place-items:center;
- background:radial-gradient(120% 120% at 30% 22%,rgba(255,255,255,.16),rgba(255,255,255,.02) 45%,rgba(0,0,0,.25));
- border:1px solid rgba(242,239,233,.22);
- box-shadow:inset 0 1px 1px rgba(255,255,255,.22), inset 0 -8px 14px rgba(0,0,0,.45), 0 10px 30px rgba(0,0,0,.5);
- transition:border-color .6s,box-shadow .6s,transform .6s var(--ease)}
-.chamber svg{width:44%;height:44%;color:rgba(242,239,233,.45);transition:color .6s,filter .6s}
-.chamber.on{border-color:rgba(255,92,38,.8);transform:translate(-50%,-50%) scale(1.16);
- box-shadow:inset 0 1px 1px rgba(255,255,255,.25), inset 0 -8px 16px rgba(255,92,38,.2), 0 0 34px rgba(255,92,38,.35), 0 12px 34px rgba(0,0,0,.55)}
-.chamber.on svg{color:var(--accent);filter:drop-shadow(0 0 10px rgba(255,92,38,.8))}
-.chamber.done{border-color:rgba(255,92,38,.3)}
-.chamber.done svg{color:rgba(255,92,38,.55)}
-.factory .beam{position:absolute;top:0;bottom:0;left:var(--fx,10%);width:30%;transform:translateX(-50%);
- background:radial-gradient(44% 55% at 50% 50%,rgba(255,92,38,.16),transparent 72%);
- pointer-events:none;transition:left 1s var(--ease)}
-.fio{position:absolute;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;
- letter-spacing:.14em;text-transform:uppercase;color:rgba(242,239,233,.4);writing-mode:vertical-rl}
-.fio.l{left:-28px;rotate:180deg}
-.fio.r{right:-28px}
-@media(max-width:1080px){.fio{display:none}}
-@media(max-width:640px){.fio{display:none}}
-html.rm .factory .beam,html.rm .chamber,html.rm .chamber svg{transition:none}
+.cmp{max-width:1080px;margin:0 auto;display:grid;gap:clamp(20px,2.6vw,30px)}
+.cmp-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.cmp-chip{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+ border-radius:999px;padding:6px 13px;border:1px solid rgba(242,239,233,.22);color:rgba(242,239,233,.75)}
+.cmp-chip.good{border-color:rgba(255,92,38,.6);color:var(--accent)}
+.cmp-line{font-size:13px;color:rgba(242,239,233,.55)}
+.cmp-stage{position:relative;height:clamp(120px,15vw,180px)}
+.cmp-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vessel{position:absolute;top:12%;bottom:8%;width:13%;transform:translateX(-50%);
+ border:1px solid rgba(242,239,233,.22);border-top:none;border-radius:0 0 14px 14px;
+ background:linear-gradient(180deg,rgba(255,255,255,.01),rgba(255,255,255,.06));
+ box-shadow:inset 0 -12px 20px rgba(0,0,0,.4)}
+.tube{position:absolute;left:2%;right:2%;top:22%;bottom:18%;border-radius:999px;
+ border:1px solid rgba(255,92,38,.42);
+ background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,92,38,.05) 55%,rgba(255,255,255,.02));
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -10px 22px rgba(0,0,0,.35), 0 0 36px rgba(255,92,38,.14)}
+.tube i{position:absolute;top:12%;bottom:12%;width:1px;background:rgba(242,239,233,.15)}
+.cmp-labels{display:grid;grid-template-columns:repeat(5,1fr);margin-top:10px}
+.cmp-labels span{text-align:center;font-size:10.5px;font-weight:700;letter-spacing:.09em;
+ text-transform:uppercase;color:rgba(242,239,233,.5)}
+.cmp-row.joined .cmp-labels span{color:rgba(242,239,233,.85)}
+.cmp-labels em{display:block;font-style:normal;font-weight:600;font-size:10px;letter-spacing:.01em;
+ text-transform:none;color:rgba(242,239,233,.42);margin-top:3px}
+.cmp-note{font-size:11.5px;color:rgba(242,239,233,.4);margin-top:16px;max-width:72ch;line-height:1.6}
+@media(max-width:640px){.cmp-labels em{display:none}.cmp-labels span{font-size:8.5px;letter-spacing:.04em}}
 .factory .tag{position:absolute;top:14px;font-size:10.5px;font-weight:700;letter-spacing:.12em;
  text-transform:uppercase;color:rgba(242,239,233,.85);background:rgba(11,11,13,.72);
  border:1px solid rgba(242,239,233,.18);border-radius:999px;padding:6px 12px;backdrop-filter:blur(6px)}
 .factory .tag.in{left:14px}
 .factory .tag.outt{right:14px}
-.stage-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(242,239,233,.14);
- background:rgba(11,11,13,.9)}
-.stage-btn{position:relative;padding:16px 6px 14px;text-align:center;font-size:11px;font-weight:700;
- letter-spacing:.1em;text-transform:uppercase;color:rgba(242,239,233,.5);transition:color .25s}
-.stage-btn::before{content:"";display:block;width:8px;height:8px;border-radius:50%;margin:0 auto 8px;
- background:rgba(242,239,233,.25);transition:background .25s,box-shadow .25s}
-.stage-btn[aria-selected="true"]{color:#f2efe9}
-.stage-btn[aria-selected="true"]::before{background:var(--accent);box-shadow:0 0 12px var(--accent)}
-.stage-btn:hover{color:#f2efe9}
-.factory-caption{padding:22px clamp(16px,3vw,30px) 24px;background:rgba(11,11,13,.9);color:#f2efe9}
-.factory-caption .k{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
-.factory-caption h3{font-size:clamp(18px,2.4vw,23px);font-weight:800;letter-spacing:-.015em;margin-top:6px}
-.factory-caption p{font-size:14px;color:rgba(242,239,233,.66);margin-top:6px;max-width:60ch}
-.factory-caption .note{font-size:11.5px;color:rgba(242,239,233,.4);margin-top:12px}
 @media(max-width:640px){
  .stage-btn{font-size:9px;letter-spacing:.06em;padding:12px 3px 10px}
 }
@@ -501,30 +488,37 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
    <div class="img-wrap">
     <span class="tag in">Before Business Booster</span>
     <span class="tag outt">After Business Booster</span>
-    <div class="fscene" role="img" aria-label="A live animation of the Business Booster growth factory: scattered particles enter on the left and are organised into one bright revenue stream as they pass the five stages">
-     <canvas id="fCanvas" aria-hidden="true"></canvas>
-     <span class="beam" id="fBeam" aria-hidden="true"></span>
-     <span class="fio l" aria-hidden="true">Scattered activity</span>
-     <div class="chamber" data-ch="0" style="--gx:10%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></div>
-     <div class="chamber" data-ch="1" style="--gx:30%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></div>
-     <div class="chamber" data-ch="2" style="--gx:50%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="6.4" r="1.1"/><circle cx="12" cy="17.6" r="1.1"/><circle cx="6.4" cy="12" r="1.1"/><circle cx="17.6" cy="12" r="1.1"/></svg></div>
-     <div class="chamber" data-ch="3" style="--gx:70%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3c-1.6 0-3.1-.4-4.4-1.1L3 20l1.4-4.9A8.1 8.1 0 0 1 3.6 11.5 8.4 8.4 0 0 1 12.1 3.2 8.4 8.4 0 0 1 21 11.5z"/></svg></div>
-     <div class="chamber" data-ch="4" style="--gx:90%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6.2" rx="7.5" ry="2.8"/><path d="M4.5 6.2v5.8c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6.2"/><path d="M4.5 12v5.8c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V12"/></svg></div>
-     <span class="fio r" aria-hidden="true">Revenue path</span>
+    <div class="cmp" role="img" aria-label="Two panels compare a broken funnel, where customers leak away between disconnected stages, with the connected journey, where one system carries them from awareness to repeat business">
+     <div class="cmp-row broken">
+      <div class="cmp-head"><span class="cmp-chip">The broken funnel</span><span class="cmp-line">Traffic comes in. Customers disappear between the stages.</span></div>
+      <div class="cmp-stage">
+       <canvas class="cmp-cv" id="cvA" aria-hidden="true"></canvas>
+       <div class="vessel" style="left:10%"></div>
+       <div class="vessel" style="left:30%"></div>
+       <div class="vessel" style="left:50%"></div>
+       <div class="vessel" style="left:70%"></div>
+       <div class="vessel" style="left:90%"></div>
+      </div>
+      <div class="cmp-labels">
+       <span>Awareness</span><span>Interest</span><span>Enquiry</span><span>Sale</span><span>Repeat</span>
+      </div>
+     </div>
+     <div class="cmp-row joined">
+      <div class="cmp-head"><span class="cmp-chip good">The connected journey</span><span class="cmp-line">One system carries them from click to sale, and back again.</span></div>
+      <div class="cmp-stage">
+       <div class="tube"><i style="left:20%"></i><i style="left:40%"></i><i style="left:60%"></i><i style="left:80%"></i></div>
+       <canvas class="cmp-cv" id="cvB" aria-hidden="true"></canvas>
+      </div>
+      <div class="cmp-labels">
+       <span>Awareness<em>the right people see you</em></span>
+       <span>Interest<em>content with a job</em></span>
+       <span>Enquiry<em>attention becomes a chat</em></span>
+       <span>Sale<em>somebody owns the close</em></span>
+       <span>Repeat<em>follow-up never forgets</em></span>
+      </div>
+     </div>
+     <p class="cmp-note">Drawn live in code, not a stock graphic. And honest on purpose: no invented percentages anywhere, because a system gives the work direction and never guarantees a result. The leak you can see is the argument.</p>
     </div>
-   </div>
-   <div class="stage-rail" role="tablist" aria-label="The five stages of the growth factory">
-    <button class="stage-btn" data-stage="0" role="tab" aria-selected="true">Diagnose</button>
-    <button class="stage-btn" data-stage="1" role="tab" aria-selected="false">Direct</button>
-    <button class="stage-btn" data-stage="2" role="tab" aria-selected="false">Create</button>
-    <button class="stage-btn" data-stage="3" role="tab" aria-selected="false">Convert</button>
-    <button class="stage-btn" data-stage="4" role="tab" aria-selected="false">Revenue path</button>
-   </div>
-   <div class="factory-caption" aria-live="polite">
-    <p class="k" id="fKicker">Diagnose</p>
-    <h3 id="fTitle">Find the real bottleneck.</h3>
-    <p id="fCopy">It starts with an honest read of what is holding attention, enquiries or follow-up back. Direction before noise.</p>
-    <p class="note">The grey sparks falling away are the customers a business loses between click and sale. The five stages exist to stop that. Drawn live in code, and honest: a system gives the work direction, it never guarantees a result.</p>
    </div>
   </div>
  </div>
@@ -938,124 +932,83 @@ if(matchMedia('(pointer:fine)').matches&&!RM){
  });
 }
 
-/* ═══ THE GROWTH FACTORY: five stages, one moving current ═══ */
-var FSTAGES=[
- {k:'Diagnose',t:'Find the real bottleneck.',c:'It starts with an honest read of what is holding attention, enquiries or follow-up back. Direction before noise.',x:10},
- {k:'Direct',t:'Choose what moves first.',c:'One commercial priority, a written strategy and every useful action placed in a clear order.',x:30},
- {k:'Create',t:'Make content with a job.',c:'Posts, films and campaigns built to earn the right attention and make the next action obvious.',x:50},
- {k:'Convert',t:'Turn attention into enquiry.',c:'Social activity connects to a website, a conversation or a sales handoff that somebody owns.',x:70},
- {k:'Revenue path',t:'Keep the opportunity moving.',c:'Follow-up and measurement keep every enquiry alive. The system never forgets, and it never pretends an outcome is guaranteed.',x:90}
-];
-var fBeam=document.getElementById('fBeam'),fKicker=document.getElementById('fKicker'),
-    fTitle=document.getElementById('fTitle'),fCopy=document.getElementById('fCopy'),
-    fBtns=[].slice.call(document.querySelectorAll('.stage-btn')),
-    fIdx=0,fManualUntil=0;
-var fChs=[].slice.call(document.querySelectorAll('.chamber'));
-function fSelect(i,manual){
- fIdx=i;
- var S=FSTAGES[i];
- fBtns.forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false');b.tabIndex=j===i?0:-1;});
- fChs.forEach(function(c,j){c.classList.toggle('on',j===i);c.classList.toggle('done',j<i);});
- fBeam.style.left=S.x+'%';
- fKicker.textContent=S.k;fTitle.textContent=S.t;fCopy.textContent=S.c;
- if(manual){fManualUntil=Date.now()+9000;bbTrack('factory_stage',{stage:S.k});}
-}
-fBtns.forEach(function(b,i){
- b.addEventListener('click',function(){fSelect(i,true)});
- b.addEventListener('keydown',function(e){
-  if(e.key==='ArrowRight'){fSelect(Math.min(4,fIdx+1),true);fBtns[fIdx].focus();e.preventDefault();}
-  if(e.key==='ArrowLeft'){fSelect(Math.max(0,fIdx-1),true);fBtns[fIdx].focus();e.preventDefault();}
- });
-});
-if(!RM){
- setInterval(function(){
-  if(Date.now()<fManualUntil)return;
-  var fEl=document.querySelector('.factory');
-  var r=fEl.getBoundingClientRect();
-  if(r.bottom<0||r.top>window.innerHeight)return;
-  fSelect((fIdx+1)%FSTAGES.length,false);
- },4500);
-}
-
-/* the living scene: scattered grey particles enter left, get organised gate by gate
-   and leave as one bright orange stream. Chaos becoming order is the whole pitch. */
+/* ═══ THE COMPARISON: broken funnel above, connected journey below ═══
+   Same crowd, same stages. Up top the vessels are disconnected and people leak
+   away in the gaps. Below, one tube carries them through. No numbers, just the leak. */
 (function(){
- var cv=document.getElementById('fCanvas');
- if(!cv||!cv.getContext)return;
- var ctx=cv.getContext('2d');
- var W=0,H=0,DPR=Math.min(2,window.devicePixelRatio||1);
- function size(){
-  var r=cv.parentElement.getBoundingClientRect();
-  W=r.width;H=r.height;
-  cv.width=Math.max(1,W*DPR);cv.height=Math.max(1,H*DPR);
-  ctx.setTransform(DPR,0,0,DPR,0,0);
- }
- size();
- addEventListener('resize',size,{passive:true});
- var N=Math.max(70,Math.min(150,Math.floor(W/7)));
- var P=[];
- function spawn(p,anywhere){
-  p.x=anywhere?Math.random()*W:-8;
-  p.y=H*0.5+(Math.random()-0.5)*H*0.85;
-  p.v=0.5+Math.random()*0.8;
-  p.seed=Math.random()*1000;
-  p.sz=1+Math.random()*1.5;
-  /* the leak: some never make it. Most doom points land early, none late.
-     This is the honest version of the dripping funnel: losses happen between
-     click and sale, and the gates exist to stop them. */
-  p.doomX=Math.random()<0.42?W*(0.06+Math.pow(Math.random(),2.2)*0.55):-1;
-  p.fall=0;p.dead=0;
- }
- for(var i=0;i<N;i++){var p={};spawn(p,true);P.push(p);}
- var t=0;
- function draw(){
-  t+=1;
-  ctx.clearRect(0,0,W,H);
-  for(var g=0;g<5;g++){
-   var gx=W*(0.1+g*0.2),act=g===fIdx;
-   var grd=ctx.createLinearGradient(0,0,0,H);
-   grd.addColorStop(0,'rgba(242,239,233,0)');
-   grd.addColorStop(0.5,act?'rgba(255,92,38,0.55)':'rgba(242,239,233,0.13)');
-   grd.addColorStop(1,'rgba(242,239,233,0)');
-   ctx.fillStyle=grd;
-   ctx.fillRect(gx-(act?1:0.5),H*0.06,act?2:1,H*0.88);
+ function eng(id,mode){
+  var cv=document.getElementById(id);
+  if(!cv||!cv.getContext)return null;
+  var ctx=cv.getContext('2d');
+  var W=0,H=0,DPR=Math.min(2,window.devicePixelRatio||1);
+  function size(){
+   var r=cv.parentElement.getBoundingClientRect();
+   W=r.width;H=r.height;
+   cv.width=Math.max(1,W*DPR);cv.height=Math.max(1,H*DPR);
+   ctx.setTransform(DPR,0,0,DPR,0,0);
   }
-  for(var j=0;j<P.length;j++){
-   var q=P[j];
-   if(q.doomX>0&&q.x>q.doomX){
-    q.fall+=0.08;
-    q.y+=q.fall;
-    q.x+=q.v*0.4;
-    q.dead+=0.02;
-    var fo=Math.max(0,0.3-q.dead);
-    if(fo<=0||q.y>H+8){spawn(q,false);continue;}
-    ctx.fillStyle='rgba(150,150,158,'+fo.toFixed(3)+')';
-    ctx.beginPath();ctx.arc(q.x,q.y,q.sz,0,6.283);ctx.fill();
-    continue;
-   }
-   var prog=Math.max(0,Math.min(1,(q.x/W-0.06)/0.86));
-   var chaos=Math.pow(1-prog,1.6);
-   var braid=Math.sin(q.x*0.025+q.seed)*H*(0.012+0.055*(1-prog));
-   var wander=Math.sin(t*0.02+q.seed*3)*H*0.32*chaos;
-   var ty=H*0.5+braid+wander;
-   q.y+=(ty-q.y)*(0.06+prog*0.08);
-   var seg=Math.floor(q.x/W/0.2);
-   q.x+=q.v*(1+prog*0.6)*(seg===fIdx?1.8:1);
-   if(q.x>W+10)spawn(q,false);
-   var o=0.25+prog*0.75;
-   var cr=Math.round(150+prog*105),cg=Math.round(150-prog*58),cb=Math.round(158-prog*120);
-   if(prog>0.55){
-    ctx.fillStyle='rgba(255,92,38,'+(0.05*(prog-0.55)*2.2).toFixed(3)+')';
-    ctx.beginPath();ctx.arc(q.x,q.y,q.sz*3,0,6.283);ctx.fill();
-   }
-   ctx.fillStyle='rgba('+cr+','+cg+','+cb+','+o.toFixed(3)+')';
-   ctx.beginPath();ctx.arc(q.x,q.y,q.sz,0,6.283);ctx.fill();
+  size();addEventListener('resize',size,{passive:true});
+  var N=Math.max(50,Math.min(110,Math.floor(W/9)));
+  var P=[];
+  function spawn(q,anywhere){
+   q.x=anywhere?Math.random()*W:-6;
+   q.y=H*(mode==='broken'?0.42:0.5)+(Math.random()-0.5)*H*(mode==='broken'?0.3:0.22);
+   q.v=0.45+Math.random()*0.7;
+   q.seed=Math.random()*1000;
+   q.sz=1+Math.random()*1.4;
+   q.fall=0;q.dead=0;
   }
+  for(var i=0;i<N;i++){var q={};spawn(q,true);P.push(q);}
+  var t=0;
+  function inGap(x){
+   var f=(x/W*100)%20;   /* vessels centred every 20%, 13% wide */
+   return f>16.5||f<3.5;
+  }
+  function draw(){
+   t+=1;
+   ctx.clearRect(0,0,W,H);
+   for(var j=0;j<P.length;j++){
+    var q=P[j];
+    if(mode==='broken'){
+     if(q.fall>0||(inGap(q.x)&&q.x>W*0.03&&Math.random()<0.05)){
+      q.fall+=0.1;q.y+=q.fall;q.x+=q.v*0.3;q.dead+=0.02;
+      var fo=Math.max(0,0.34-q.dead);
+      if(fo<=0||q.y>H+6){spawn(q,false);continue;}
+      ctx.fillStyle='rgba(150,150,158,'+fo.toFixed(3)+')';
+      ctx.beginPath();ctx.arc(q.x,q.y,q.sz,0,6.283);ctx.fill();
+      continue;
+     }
+     q.y+=((H*0.42+Math.sin(t*0.03+q.seed)*H*0.1)-q.y)*0.05;
+     q.x+=q.v;
+     if(q.x>W+6)spawn(q,false);
+     var surv=q.x/W;
+     ctx.fillStyle='rgba(165,165,172,'+(0.3+surv*0.25).toFixed(3)+')';
+     ctx.beginPath();ctx.arc(q.x,q.y,q.sz,0,6.283);ctx.fill();
+    }else{
+     var prog=Math.max(0,Math.min(1,q.x/W));
+     var braid=Math.sin(q.x*0.03+q.seed)*H*0.1;
+     q.y+=((H*0.5+braid)-q.y)*0.08;
+     q.x+=q.v*(1+prog*0.5);
+     if(q.x>W+6)spawn(q,false);
+     var cr=Math.round(170+prog*85),cg=Math.round(150-prog*58),cb=Math.round(150-prog*112);
+     if(prog>0.35){
+      ctx.fillStyle='rgba(255,92,38,'+(0.05*(prog-0.35)).toFixed(3)+')';
+      ctx.beginPath();ctx.arc(q.x,q.y,q.sz*3,0,6.283);ctx.fill();
+     }
+     ctx.fillStyle='rgba('+cr+','+cg+','+cb+','+(0.4+prog*0.6).toFixed(3)+')';
+     ctx.beginPath();ctx.arc(q.x,q.y,q.sz,0,6.283);ctx.fill();
+    }
+   }
+  }
+  return {cv:cv,draw:draw,warm:function(){for(var k=0;k<300;k++)draw();}};
  }
- if(RM){for(var k=0;k<240;k++){t+=1;P.forEach(function(q){var prog=Math.max(0,Math.min(1,(q.x/W-0.06)/0.86));q.x+=q.v*(1+prog);if(q.x>W+10)spawn(q,false);});}draw();return;}
+ var A=eng('cvA','broken'),B=eng('cvB','joined');
+ if(!A||!B)return;
+ if(RM){A.warm();B.warm();return;}
  (function loop(){
-  var r=cv.getBoundingClientRect();
-  if(r.bottom>0&&r.top<window.innerHeight)draw();
+  var r=A.cv.getBoundingClientRect();
+  var r2=B.cv.getBoundingClientRect();
+  if((r.bottom>0&&r.top<window.innerHeight)||(r2.bottom>0&&r2.top<window.innerHeight)){A.draw();B.draw();}
   requestAnimationFrame(loop);
  })();
 })();
