@@ -150,26 +150,22 @@ body.drawer-lock{position:fixed;width:100%}
 .factory .img-wrap{position:relative;overflow:hidden;background:
  radial-gradient(90% 120% at 50% -10%,#1c1c22,#0b0b0d 60%);
  padding:clamp(40px,6vw,72px) clamp(16px,3vw,40px) clamp(34px,5vw,60px)}
-.fscene{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(8px,1.4vw,18px);
- max-width:960px;margin:0 auto}
-.fscene::before{content:"";position:absolute;left:2%;right:2%;top:50%;height:1px;
- background:linear-gradient(90deg,transparent,rgba(242,239,233,.22) 12%,rgba(242,239,233,.22) 88%,transparent)}
-.chamber{position:relative;aspect-ratio:3/4;border-radius:18px;display:grid;place-items:center;
- background:linear-gradient(165deg,rgba(255,255,255,.09),rgba(255,255,255,.015) 55%,rgba(255,255,255,.05));
- border:1px solid rgba(242,239,233,.16);
- box-shadow:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -14px 26px rgba(0,0,0,.5), 0 14px 34px rgba(0,0,0,.5);
+.fscene{position:relative;height:clamp(300px,36vw,430px);max-width:1080px;margin:0 auto}
+#fCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.chamber{position:absolute;top:50%;left:var(--gx);transform:translate(-50%,-50%);
+ width:clamp(46px,5.6vw,68px);height:clamp(46px,5.6vw,68px);border-radius:50%;display:grid;place-items:center;
+ background:radial-gradient(120% 120% at 30% 22%,rgba(255,255,255,.16),rgba(255,255,255,.02) 45%,rgba(0,0,0,.25));
+ border:1px solid rgba(242,239,233,.22);
+ box-shadow:inset 0 1px 1px rgba(255,255,255,.22), inset 0 -8px 14px rgba(0,0,0,.45), 0 10px 30px rgba(0,0,0,.5);
  transition:border-color .6s,box-shadow .6s,transform .6s var(--ease)}
-.chamber::after{content:"";position:absolute;left:10%;right:10%;bottom:-11px;height:3px;border-radius:99px;
- background:rgba(242,239,233,.1);transition:background .6s,box-shadow .6s}
-.chamber svg{width:clamp(30px,4.6vw,56px);height:clamp(30px,4.6vw,56px);color:rgba(242,239,233,.32);
- transition:color .6s,filter .6s,transform .6s var(--ease)}
-.chamber.on{border-color:rgba(255,92,38,.55);transform:translateY(-4px);
- box-shadow:inset 0 1px 0 rgba(255,255,255,.18), inset 0 -18px 34px rgba(255,92,38,.14), 0 18px 44px rgba(0,0,0,.55)}
-.chamber.on::after{background:var(--accent);box-shadow:0 0 18px var(--accent)}
-.chamber.on svg{color:var(--accent);filter:drop-shadow(0 0 14px rgba(255,92,38,.75));transform:scale(1.12)}
-.chamber.done svg{color:rgba(255,92,38,.5)}
-.factory .beam{position:absolute;top:-30%;bottom:-10%;left:var(--fx,10%);width:34%;transform:translateX(-50%);
- background:radial-gradient(46% 52% at 50% 58%,rgba(255,92,38,.22),transparent 72%);
+.chamber svg{width:44%;height:44%;color:rgba(242,239,233,.45);transition:color .6s,filter .6s}
+.chamber.on{border-color:rgba(255,92,38,.8);transform:translate(-50%,-50%) scale(1.16);
+ box-shadow:inset 0 1px 1px rgba(255,255,255,.25), inset 0 -8px 16px rgba(255,92,38,.2), 0 0 34px rgba(255,92,38,.35), 0 12px 34px rgba(0,0,0,.55)}
+.chamber.on svg{color:var(--accent);filter:drop-shadow(0 0 10px rgba(255,92,38,.8))}
+.chamber.done{border-color:rgba(255,92,38,.3)}
+.chamber.done svg{color:rgba(255,92,38,.55)}
+.factory .beam{position:absolute;top:0;bottom:0;left:var(--fx,10%);width:30%;transform:translateX(-50%);
+ background:radial-gradient(44% 55% at 50% 50%,rgba(255,92,38,.16),transparent 72%);
  pointer-events:none;transition:left 1s var(--ease)}
 .fio{position:absolute;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;
  letter-spacing:.14em;text-transform:uppercase;color:rgba(242,239,233,.4);writing-mode:vertical-rl}
@@ -505,14 +501,15 @@ footer .bar{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);di
    <div class="img-wrap">
     <span class="tag in">Before Business Booster</span>
     <span class="tag outt">After Business Booster</span>
-    <div class="fscene" role="img" aria-label="The Business Booster growth factory: five glass chambers for diagnose, direct, create, convert and revenue path, with an orange current moving through them">
+    <div class="fscene" role="img" aria-label="A live animation of the Business Booster growth factory: scattered particles enter on the left and are organised into one bright revenue stream as they pass the five stages">
+     <canvas id="fCanvas" aria-hidden="true"></canvas>
      <span class="beam" id="fBeam" aria-hidden="true"></span>
      <span class="fio l" aria-hidden="true">Scattered activity</span>
-     <div class="chamber" data-ch="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></div>
-     <div class="chamber" data-ch="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></div>
-     <div class="chamber" data-ch="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="6.4" r="1.1"/><circle cx="12" cy="17.6" r="1.1"/><circle cx="6.4" cy="12" r="1.1"/><circle cx="17.6" cy="12" r="1.1"/></svg></div>
-     <div class="chamber" data-ch="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3c-1.6 0-3.1-.4-4.4-1.1L3 20l1.4-4.9A8.1 8.1 0 0 1 3.6 11.5 8.4 8.4 0 0 1 12.1 3.2 8.4 8.4 0 0 1 21 11.5z"/></svg></div>
-     <div class="chamber" data-ch="4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6.2" rx="7.5" ry="2.8"/><path d="M4.5 6.2v5.8c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6.2"/><path d="M4.5 12v5.8c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V12"/></svg></div>
+     <div class="chamber" data-ch="0" style="--gx:10%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></div>
+     <div class="chamber" data-ch="1" style="--gx:30%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></div>
+     <div class="chamber" data-ch="2" style="--gx:50%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="6.4" r="1.1"/><circle cx="12" cy="17.6" r="1.1"/><circle cx="6.4" cy="12" r="1.1"/><circle cx="17.6" cy="12" r="1.1"/></svg></div>
+     <div class="chamber" data-ch="3" style="--gx:70%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3c-1.6 0-3.1-.4-4.4-1.1L3 20l1.4-4.9A8.1 8.1 0 0 1 3.6 11.5 8.4 8.4 0 0 1 12.1 3.2 8.4 8.4 0 0 1 21 11.5z"/></svg></div>
+     <div class="chamber" data-ch="4" style="--gx:90%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6.2" rx="7.5" ry="2.8"/><path d="M4.5 6.2v5.8c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6.2"/><path d="M4.5 12v5.8c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V12"/></svg></div>
      <span class="fio r" aria-hidden="true">Revenue path</span>
     </div>
    </div>
@@ -979,6 +976,73 @@ if(!RM){
   fSelect((fIdx+1)%FSTAGES.length,false);
  },4500);
 }
+
+/* the living scene: scattered grey particles enter left, get organised gate by gate
+   and leave as one bright orange stream. Chaos becoming order is the whole pitch. */
+(function(){
+ var cv=document.getElementById('fCanvas');
+ if(!cv||!cv.getContext)return;
+ var ctx=cv.getContext('2d');
+ var W=0,H=0,DPR=Math.min(2,window.devicePixelRatio||1);
+ function size(){
+  var r=cv.parentElement.getBoundingClientRect();
+  W=r.width;H=r.height;
+  cv.width=Math.max(1,W*DPR);cv.height=Math.max(1,H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+ }
+ size();
+ addEventListener('resize',size,{passive:true});
+ var N=Math.max(70,Math.min(150,Math.floor(W/7)));
+ var P=[];
+ function spawn(p,anywhere){
+  p.x=anywhere?Math.random()*W:-8;
+  p.y=H*0.5+(Math.random()-0.5)*H*0.85;
+  p.v=0.5+Math.random()*0.8;
+  p.seed=Math.random()*1000;
+  p.sz=1+Math.random()*1.5;
+ }
+ for(var i=0;i<N;i++){var p={};spawn(p,true);P.push(p);}
+ var t=0;
+ function draw(){
+  t+=1;
+  ctx.clearRect(0,0,W,H);
+  for(var g=0;g<5;g++){
+   var gx=W*(0.1+g*0.2),act=g===fIdx;
+   var grd=ctx.createLinearGradient(0,0,0,H);
+   grd.addColorStop(0,'rgba(242,239,233,0)');
+   grd.addColorStop(0.5,act?'rgba(255,92,38,0.55)':'rgba(242,239,233,0.13)');
+   grd.addColorStop(1,'rgba(242,239,233,0)');
+   ctx.fillStyle=grd;
+   ctx.fillRect(gx-(act?1:0.5),H*0.06,act?2:1,H*0.88);
+  }
+  for(var j=0;j<P.length;j++){
+   var q=P[j];
+   var prog=Math.max(0,Math.min(1,(q.x/W-0.06)/0.86));
+   var chaos=Math.pow(1-prog,1.6);
+   var braid=Math.sin(q.x*0.025+q.seed)*H*(0.012+0.055*(1-prog));
+   var wander=Math.sin(t*0.02+q.seed*3)*H*0.32*chaos;
+   var ty=H*0.5+braid+wander;
+   q.y+=(ty-q.y)*(0.06+prog*0.08);
+   var seg=Math.floor(q.x/W/0.2);
+   q.x+=q.v*(1+prog*0.6)*(seg===fIdx?1.8:1);
+   if(q.x>W+10)spawn(q,false);
+   var o=0.25+prog*0.75;
+   var cr=Math.round(150+prog*105),cg=Math.round(150-prog*58),cb=Math.round(158-prog*120);
+   if(prog>0.55){
+    ctx.fillStyle='rgba(255,92,38,'+(0.05*(prog-0.55)*2.2).toFixed(3)+')';
+    ctx.beginPath();ctx.arc(q.x,q.y,q.sz*3,0,6.283);ctx.fill();
+   }
+   ctx.fillStyle='rgba('+cr+','+cg+','+cb+','+o.toFixed(3)+')';
+   ctx.beginPath();ctx.arc(q.x,q.y,q.sz,0,6.283);ctx.fill();
+  }
+ }
+ if(RM){for(var k=0;k<240;k++){t+=1;P.forEach(function(q){var prog=Math.max(0,Math.min(1,(q.x/W-0.06)/0.86));q.x+=q.v*(1+prog);if(q.x>W+10)spawn(q,false);});}draw();return;}
+ (function loop(){
+  var r=cv.getBoundingClientRect();
+  if(r.bottom>0&&r.top<window.innerHeight)draw();
+  requestAnimationFrame(loop);
+ })();
+})();
 
 /* problem picker: deterministic diagnosis, routed to the right arm plus WhatsApp */
 var PROBLEMS={
