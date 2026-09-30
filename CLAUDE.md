@@ -97,3 +97,6 @@ handoff for Claude Code or any other coding agent.
 4. Verify at 390px by DOM measurement (scrollWidth), not by screenshot alone.
 5. Console clean. Every wa.me link URL-encoded. No invented claims.
 6. Copy changes pass the bb-human-voice checker.
+
+## /packages/ (added 30 Sep 2026)
+`packages/` is a separate Astro build (`~/bb-websites/bb-packages`) copied in as static files; never hand edit it here. It prints prices by Thulaib's decision of 30 Sep 2026 (the "no prices" rule above covers the homepage, not this page) and carries noindex while it is sent as a sales link.
