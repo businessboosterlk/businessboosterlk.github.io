@@ -1,54 +1,126 @@
-<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Who opened the packages page | Business Booster</title><meta name="description" content="Business Booster team screen: visits to the packages page, by client link."><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0b0b0c"><link rel="icon" href="/packages/favicon.png"><link rel="stylesheet" href="/packages/assets/app/style.VzDfjzYh.css"></head><body class="vw"><main class="vw-main" id="main"><img class="vw-logo" src="/packages/logo.png" width="600" height="243" alt="Business Booster"><p class="eyebrow">Team screen</p><h1>Who opened the packages page</h1><form class="vw-gate" id="vw-gate" autocomplete="off"><label class="vw-label" for="vw-pass">Passphrase</label><input class="vw-input" id="vw-pass" name="passphrase" type="password" autocomplete="current-password" enterkeyhint="go" spellcheck="false" required><button class="btn" id="vw-go" type="submit">Show views</button><p class="vw-msg" id="vw-msg" role="status" aria-live="polite"></p></form><section class="vw-res" id="vw-res" aria-labelledby="vw-sum" hidden><p class="vw-sum" id="vw-sum"></p><div class="vw-bar"><label class="sr-only" for="vw-filter">Filter by client</label><input class="vw-input" id="vw-filter" type="search" inputmode="search" autocomplete="off" spellcheck="false" placeholder="Filter by client"><button class="btn ghost" id="vw-refresh" type="button">Refresh</button></div><div class="vw-list" id="vw-list"></div><p class="vw-empty" id="vw-empty" hidden></p><p class="vw-foot"><a href="/packages/link">Make a package link</a></p></section></main><script>(function(){const DB = {"url":"https://yyviiwnqgphyklcoijyd.supabase.co","key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5dmlpd25xZ3BoeWtsY29panlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjE5OTEsImV4cCI6MjA5MTI5Nzk5MX0.I8YiBr-rfLVcc6DE8Z1PxEP2oxXCelv6mxqAY_wY7lc"};
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Who opened the packages page | Business Booster</title><meta name="description" content="Business Booster team screen: visits to the packages page, by client link."><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0b0b0c"><link rel="icon" href="/packages/favicon.png"><link rel="stylesheet" href="/packages/assets/app/style.DbQ-TzTV.css"></head><body class="vw"><main class="vw-main" id="main"><img class="vw-logo" src="/packages/logo.png" width="600" height="243" alt="Business Booster"><p class="eyebrow">Team screen</p><h1 id="vw-h1">Who opened the packages page</h1><form class="vw-gate" id="vw-gate"><p class="vw-intro" id="vw-intro" hidden>Choose the password you will sign in with. At least 8 characters. Nobody else sees it.</p><label class="vw-label" for="vw-email">Email</label><input class="vw-input" id="vw-email" name="email" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" required><label class="vw-label" for="vw-pass" id="vw-pass-l">Password</label><input class="vw-input" id="vw-pass" name="password" type="password" autocomplete="current-password" enterkeyhint="go" required><div id="vw-again" hidden><label class="vw-label" for="vw-pass2">Type it again</label><input class="vw-input" id="vw-pass2" name="password2" type="password" autocomplete="new-password" enterkeyhint="go"></div><button class="btn" id="vw-go" type="submit">Sign in</button><p class="vw-msg" id="vw-msg" role="status" aria-live="polite"></p></form><section class="vw-res" id="vw-res" aria-labelledby="vw-sum" hidden><p class="vw-sum" id="vw-sum"></p><div class="vw-bar"><label class="sr-only" for="vw-filter">Filter by client</label><input class="vw-input" id="vw-filter" type="search" inputmode="search" autocomplete="off" spellcheck="false" placeholder="Filter by client"><button class="btn ghost" id="vw-refresh" type="button">Refresh</button><button class="btn quiet" id="vw-out" type="button">Sign out</button></div><div class="vw-list" id="vw-list"></div><p class="vw-empty" id="vw-empty" hidden></p><p class="vw-foot"><a href="/packages/link">Make a package link</a></p></section></main><script>(function(){const DB = {"url":"https://yyviiwnqgphyklcoijyd.supabase.co","key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5dmlpd25xZ3BoeWtsY29panlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjE5OTEsImV4cCI6MjA5MTI5Nzk5MX0.I8YiBr-rfLVcc6DE8Z1PxEP2oxXCelv6mxqAY_wY7lc"};
 const STAGES = [["top","Start"],["fit","Find your fit"],["work","See the work"],["packages","The packages"],["month","First month"],["compare","Compare"],["next","Recommendation"]];
 
 (function(){
   var doc=document, $=function(id){return doc.getElementById(id)};
-  var gate=$('vw-gate'), pass=$('vw-pass'), go=$('vw-go'), msg=$('vw-msg'), res=$('vw-res'), sum=$('vw-sum'),
-      list=$('vw-list'), empty=$('vw-empty'), filter=$('vw-filter'), refresh=$('vw-refresh');
-  var secret='', rows=[], busy=false;
+  var gate=$('vw-gate'), email=$('vw-email'), pass=$('vw-pass'), pass2=$('vw-pass2'), again=$('vw-again'), intro=$('vw-intro'), passL=$('vw-pass-l'),
+      go=$('vw-go'), msg=$('vw-msg'), res=$('vw-res'), sum=$('vw-sum'), h1=$('vw-h1'),
+      list=$('vw-list'), empty=$('vw-empty'), filter=$('vw-filter'), refresh=$('vw-refresh'), out=$('vw-out');
+  var who='', secret='', rows=[], busy=false, open={};
+  var SETUP=(new URLSearchParams(location.search).get('setup')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,80);
   var order=STAGES.map(function(s){return s[0]}), label={}; STAGES.forEach(function(s){label[s[0]]=s[1]});
-  var fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Colombo',weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
-  function when(t){return fmt.format(new Date(t)).replace(/,/g,'')}
+  var dayFmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Colombo',weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+  var clockFmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Colombo',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  var COUNTRY; try{COUNTRY=new Intl.DisplayNames(['en'],{type:'region'})}catch(e){COUNTRY=null}
+  function when(t){return dayFmt.format(new Date(t)).replace(/,/g,'')}
+  function country(c){try{return COUNTRY?COUNTRY.of(c):c}catch(e){return c}}
+  function dur(s){s=s||0;if(s<60)return s+' sec';var m=Math.floor(s/60),r=s%60;if(m<60)return m+' min'+(r?' '+r+' sec':'');return Math.floor(m/60)+' hr '+(m%60)+' min'}
   function say(text,bad){msg.textContent=text;msg.className='vw-msg'+(bad?' bad':'')}
   function furthest(a){var best=-1;(a||[]).forEach(function(id){var i=order.indexOf(id);if(i>best)best=i});return best<0?'':label[order[best]]}
   function plural(n,w){return n+' '+w+(n===1?'':'s')}
-  function row(dl,k,v){var dt=doc.createElement('dt');dt.textContent=k;var dd=doc.createElement('dd');if(v){dd.textContent=v}else{dd.textContent='Not yet';dd.className='none'}dl.appendChild(dt);dl.appendChild(dd)}
+  function kind(d){return d==='desk'?'a computer':d==='phone'?'a phone':''}
+  var Q={f1:'Has someone to post every day',f2:'Wants Business Booster to run it',f3:'Ready for paid media and the Apex term'};
+  function words(e){
+    var p=e.package||'', d=e.detail||'';
+    switch(e.event){
+      case 'page_open': return 'Opened the page';
+      case 'stage_viewed': return 'Reached: '+(label[e.section]||e.section);
+      case 'hero_find_fit': return 'Tapped Find my likely package';
+      case 'hero_send_page': return 'Tapped Send us your page, to WhatsApp';
+      case 'fit_option_selected': var a=d.split(':');return 'Answered: '+(Q[a[0]]||a[0])+'? '+(a[1]==='yes'?'Yes':'No');
+      case 'fit_result_viewed': return 'The finder suggested '+p;
+      case 'tier_details_opened': return 'Opened everything included in '+p;
+      case 'tier_whatsapp_clicked': return 'Tapped WhatsApp about '+p;
+      case 'proof_sample_opened': return 'Asked to see the samples';
+      case 'comparison_viewed': return 'Looked at the comparison table';
+      case 'faq_opened': return 'Opened a question'+(d?': '+d:'');
+      case 'final_whatsapp_clicked': return 'Tapped Get my recommendation on WhatsApp';
+      default: return e.event;
+    }
+  }
+  function row(dl,k,v,cls,none){var dt=doc.createElement('dt');dt.textContent=k;var dd=doc.createElement('dd');if(v){dd.textContent=v;if(cls)dd.className=cls}else{dd.textContent=none||'Not yet';dd.className='none'}dl.appendChild(dt);dl.appendChild(dd)}
+  function el(tag,text,cls){var n=doc.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n}
   function draw(){
     var q=filter.value.trim().toLowerCase();
     var shown=rows.filter(function(r){return !q||(r.who||'plain link').toLowerCase().indexOf(q)>=0});
     list.textContent='';
     shown.forEach(function(r){
-      var c=doc.createElement('article');c.className='vw-card';
-      var h=doc.createElement('h2');if(r.who){h.textContent=r.who}else{h.textContent='Plain link, no name';h.className='plain'}c.appendChild(h);
-      var big=doc.createElement('p');big.className='vw-big';var b=doc.createElement('b');b.textContent=r.visits;var s=doc.createElement('span');s.textContent=r.visits===1?'visit':'visits';big.appendChild(b);big.appendChild(s);c.appendChild(big);
+      var c=el('article',null,'vw-card');
+      c.appendChild(r.who?el('h2',r.who):el('h2','Plain link, no name','plain'));
+      var big=el('p',null,'vw-big');big.appendChild(el('b',String(r.visits)));big.appendChild(el('span',(r.visits===1?'visit':'visits')+', '+dur(r.seconds)+' on the page'));c.appendChild(big);
       var dl=doc.createElement('dl');
       row(dl,'Last opened',when(r.last_opened)); row(dl,'First opened',when(r.first_opened));
+      row(dl,'Devices',r.devices>1?r.devices+' different devices: the link may have been shared':r.devices===1?'1 device':'',r.devices>1?'flag':'','Not known');
       row(dl,'Got as far as',furthest(r.reached)); row(dl,'Finder suggested',(r.finder_suggested||[]).join(' and '));
       row(dl,'Package opened',(r.opened_package||[]).join(' and ')); row(dl,'WhatsApp taps',r.whatsapp_taps?String(r.whatsapp_taps):'');
-      row(dl,'Opened on',(r.devices||[]).map(function(d){return d==='desk'?'a computer':'a phone'}).join(' and '));
-      c.appendChild(dl);list.appendChild(c);
+      row(dl,'Opened on',(r.device_kinds||[]).map(kind).filter(Boolean).join(' and '));
+      row(dl,'Country',(r.countries||[]).map(country).join(' and '),'','Not known');
+      row(dl,'Came from',(r.sources||[]).join(' and '),'','Not known');
+      c.appendChild(dl);
+      var vs=r.visit_list||[];
+      if(vs.length){
+        var det=el('details',null,'vw-visits');det.appendChild(el('summary','See each visit ('+vs.length+')'));
+        if(open[r.who])det.open=true;
+        det.addEventListener('toggle',function(){open[r.who]=det.open});
+        vs.forEach(function(v){
+          var box=el('div',null,'vw-visit');
+          box.appendChild(el('h3',when(v.started)+', '+dur(v.seconds)));
+          box.appendChild(el('p',[kind(v.device),[v.os,v.browser].filter(Boolean).join(', '),v.country?country(v.country):'',v.referrer?'from '+v.referrer:''].filter(Boolean).join(' · ')));
+          var ol=doc.createElement('ol');
+          (v.events||[]).forEach(function(e){var li=doc.createElement('li');var t=el('time',clockFmt.format(new Date(e.t)));t.setAttribute('datetime',e.t);li.appendChild(t);li.appendChild(el('span',words(e)));ol.appendChild(li)});
+          box.appendChild(ol);det.appendChild(box);
+        });
+        c.appendChild(det);
+      }
+      list.appendChild(c);
     });
     empty.hidden=shown.length>0;
     if(!shown.length)empty.textContent=rows.length?'No client matches that filter.':'No client has opened a link yet. Visits appear here as soon as one does.';
   }
+  function rpc(name,body){
+    return fetch(DB.url+'/rest/v1/rpc/'+name,{method:'POST',headers:{'Content-Type':'application/json',apikey:DB.key,Authorization:'Bearer '+DB.key},body:JSON.stringify(body)})
+      .then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.json()});
+  }
+  function locked(text){secret='';rows=[];res.hidden=true;gate.hidden=false;say(text,true);pass.value='';pass.focus()}
   function load(first){
     if(busy)return;busy=true;
     go.textContent='Checking';refresh.textContent='Refreshing';   /* the screen changes at the tap */
-    fetch(DB.url+'/rest/v1/rpc/pkg_views',{method:'POST',headers:{'Content-Type':'application/json',apikey:DB.key,Authorization:'Bearer '+DB.key},body:JSON.stringify({p_pass:secret})})
-      .then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.json()})
+    rpc('pkg_views',{p_email:who,p_pass:secret})
       .then(function(d){
-        if(!d||!d.ok){secret='';rows=[];res.hidden=true;gate.hidden=false;say('That passphrase is not right.',true);pass.value='';pass.focus();return}
-        rows=d.clients||[];gate.hidden=true;res.hidden=false;
+        if(!d||!d.ok){locked('That email and password do not match.');return}
+        rows=d.clients||[];gate.hidden=true;res.hidden=false;say('');
         var visits=rows.reduce(function(n,r){return n+r.visits},0);
-        sum.textContent='';var b=doc.createElement('b');b.textContent=plural(rows.length,'link');sum.appendChild(b);
+        sum.textContent='';sum.appendChild(el('b',plural(rows.length,'link')));
         sum.appendChild(doc.createTextNode(' opened, '+plural(visits,'visit')+' in all. Read at '+when(d.as_of)+'.'));
         draw();
       })
-      .catch(function(){say('Could not reach the database. Check the connection and try again.',true);if(!first){sum.textContent='Could not refresh. The figures below are from the last successful read.'}})
-      .then(function(){busy=false;go.textContent='Show views';refresh.textContent='Refresh'});
+      .catch(function(){if(first)say('Could not reach the database. Check the connection and try again.',true);else sum.textContent='Could not refresh. The figures below are from the last successful read.'})
+      .then(function(){busy=false;go.textContent=SETUP?'Save and sign in':'Sign in';refresh.textContent='Refresh'});
   }
-  gate.addEventListener('submit',function(ev){ev.preventDefault();secret=pass.value.trim();if(!secret){say('Type the passphrase.',true);return}say('');load(true)});
+  if(SETUP){
+    h1.textContent='Choose your password';intro.hidden=false;again.hidden=false;passL.textContent='New password';
+    pass.setAttribute('autocomplete','new-password');pass2.required=true;go.textContent='Save and sign in';
+  }
+  gate.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    who=email.value.trim().toLowerCase();secret=pass.value;
+    if(!who||!secret){say('Type your email and password.',true);return}
+    if(!SETUP){say('');load(true);return}
+    if(secret.length<8){say('Use at least 8 characters.',true);return}
+    if(secret!==pass2.value){say('The two passwords are not the same.',true);return}
+    if(busy)return;busy=true;go.textContent='Saving';say('');
+    rpc('pkg_views_setup',{p_code:SETUP,p_email:who,p_pass:secret})
+      .then(function(d){
+        busy=false;
+        if(!d||!d.ok){go.textContent='Save and sign in';say(d&&d.why==='code'?'This setup link has been used or has run out. Ask for a new one.':d&&d.why==='email'?'That email does not look right.':'Use at least 8 characters.',true);return}
+        SETUP='';try{history.replaceState(null,'',location.pathname)}catch(e){}
+        h1.textContent='Who opened the packages page';intro.hidden=true;again.hidden=true;passL.textContent='Password';pass2.required=false;pass2.value='';
+        load(true);
+      })
+      .catch(function(){busy=false;go.textContent='Save and sign in';say('Could not reach the database. Check the connection and try again.',true)});
+  });
   refresh.addEventListener('click',function(){load(false)});
+  out.addEventListener('click',function(){who='';secret='';rows=[];list.textContent='';res.hidden=true;gate.hidden=false;pass.value='';say('Signed out.');email.focus()});
   filter.addEventListener('input',draw);
 })();
 })();</script></body></html>
