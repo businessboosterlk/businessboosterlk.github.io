@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Who opened the packages page | Business Booster</title><meta name="description" content="Business Booster team screen: visits to the packages page, by client link."><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0b0b0c"><link rel="icon" href="/packages/favicon.png"><link rel="stylesheet" href="/packages/assets/app/style.VzDfjzYh.css"></head><body class="vw"><main class="vw-main" id="main"><img class="vw-logo" src="/packages/logo.png" width="600" height="243" alt="Business Booster"><p class="eyebrow">Team screen</p><h1>Who opened the packages page</h1><form class="vw-gate" id="vw-gate" autocomplete="off"><label class="vw-label" for="vw-pass">Passphrase</label><input class="vw-input" id="vw-pass" name="passphrase" type="password" autocomplete="current-password" enterkeyhint="go" spellcheck="false" required><button class="btn" id="vw-go" type="submit">Show views</button><p class="vw-msg" id="vw-msg" role="status" aria-live="polite"></p></form><section class="vw-res" id="vw-res" aria-labelledby="vw-sum" hidden><p class="vw-sum" id="vw-sum"></p><div class="vw-bar"><label class="sr-only" for="vw-filter">Filter by client</label><input class="vw-input" id="vw-filter" type="search" inputmode="search" autocomplete="off" spellcheck="false" placeholder="Filter by client"><button class="btn ghost" id="vw-refresh" type="button">Refresh</button></div><div class="vw-list" id="vw-list"></div><p class="vw-empty" id="vw-empty" hidden></p><p class="vw-foot"><a href="/packages/link">Make a package link</a></p></section></main><script>(function(){const DB = {"url":"https://yyviiwnqgphyklcoijyd.supabase.co","key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5dmlpd25xZ3BoeWtsY29panlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjE5OTEsImV4cCI6MjA5MTI5Nzk5MX0.I8YiBr-rfLVcc6DE8Z1PxEP2oxXCelv6mxqAY_wY7lc"};
+const STAGES = [["top","Start"],["fit","Find your fit"],["work","See the work"],["packages","The packages"],["month","First month"],["compare","Compare"],["next","Recommendation"]];
+
+(function(){
+  var doc=document, $=function(id){return doc.getElementById(id)};
+  var gate=$('vw-gate'), pass=$('vw-pass'), go=$('vw-go'), msg=$('vw-msg'), res=$('vw-res'), sum=$('vw-sum'),
+      list=$('vw-list'), empty=$('vw-empty'), filter=$('vw-filter'), refresh=$('vw-refresh');
+  var secret='', rows=[], busy=false;
+  var order=STAGES.map(function(s){return s[0]}), label={}; STAGES.forEach(function(s){label[s[0]]=s[1]});
+  var fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Colombo',weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+  function when(t){return fmt.format(new Date(t)).replace(/,/g,'')}
+  function say(text,bad){msg.textContent=text;msg.className='vw-msg'+(bad?' bad':'')}
+  function furthest(a){var best=-1;(a||[]).forEach(function(id){var i=order.indexOf(id);if(i>best)best=i});return best<0?'':label[order[best]]}
+  function plural(n,w){return n+' '+w+(n===1?'':'s')}
+  function row(dl,k,v){var dt=doc.createElement('dt');dt.textContent=k;var dd=doc.createElement('dd');if(v){dd.textContent=v}else{dd.textContent='Not yet';dd.className='none'}dl.appendChild(dt);dl.appendChild(dd)}
+  function draw(){
+    var q=filter.value.trim().toLowerCase();
+    var shown=rows.filter(function(r){return !q||(r.who||'plain link').toLowerCase().indexOf(q)>=0});
+    list.textContent='';
+    shown.forEach(function(r){
+      var c=doc.createElement('article');c.className='vw-card';
+      var h=doc.createElement('h2');if(r.who){h.textContent=r.who}else{h.textContent='Plain link, no name';h.className='plain'}c.appendChild(h);
+      var big=doc.createElement('p');big.className='vw-big';var b=doc.createElement('b');b.textContent=r.visits;var s=doc.createElement('span');s.textContent=r.visits===1?'visit':'visits';big.appendChild(b);big.appendChild(s);c.appendChild(big);
+      var dl=doc.createElement('dl');
+      row(dl,'Last opened',when(r.last_opened)); row(dl,'First opened',when(r.first_opened));
+      row(dl,'Got as far as',furthest(r.reached)); row(dl,'Finder suggested',(r.finder_suggested||[]).join(' and '));
+      row(dl,'Package opened',(r.opened_package||[]).join(' and ')); row(dl,'WhatsApp taps',r.whatsapp_taps?String(r.whatsapp_taps):'');
+      row(dl,'Opened on',(r.devices||[]).map(function(d){return d==='desk'?'a computer':'a phone'}).join(' and '));
+      c.appendChild(dl);list.appendChild(c);
+    });
+    empty.hidden=shown.length>0;
+    if(!shown.length)empty.textContent=rows.length?'No client matches that filter.':'No client has opened a link yet. Visits appear here as soon as one does.';
+  }
+  function load(first){
+    if(busy)return;busy=true;
+    go.textContent='Checking';refresh.textContent='Refreshing';   /* the screen changes at the tap */
+    fetch(DB.url+'/rest/v1/rpc/pkg_views',{method:'POST',headers:{'Content-Type':'application/json',apikey:DB.key,Authorization:'Bearer '+DB.key},body:JSON.stringify({p_pass:secret})})
+      .then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.json()})
+      .then(function(d){
+        if(!d||!d.ok){secret='';rows=[];res.hidden=true;gate.hidden=false;say('That passphrase is not right.',true);pass.value='';pass.focus();return}
+        rows=d.clients||[];gate.hidden=true;res.hidden=false;
+        var visits=rows.reduce(function(n,r){return n+r.visits},0);
+        sum.textContent='';var b=doc.createElement('b');b.textContent=plural(rows.length,'link');sum.appendChild(b);
+        sum.appendChild(doc.createTextNode(' opened, '+plural(visits,'visit')+' in all. Read at '+when(d.as_of)+'.'));
+        draw();
+      })
+      .catch(function(){say('Could not reach the database. Check the connection and try again.',true);if(!first){sum.textContent='Could not refresh. The figures below are from the last successful read.'}})
+      .then(function(){busy=false;go.textContent='Show views';refresh.textContent='Refresh'});
+  }
+  gate.addEventListener('submit',function(ev){ev.preventDefault();secret=pass.value.trim();if(!secret){say('Type the passphrase.',true);return}say('');load(true)});
+  refresh.addEventListener('click',function(){load(false)});
+  filter.addEventListener('input',draw);
+})();
+})();</script></body></html>
