@@ -5,7 +5,7 @@
 var root=document.getElementById('machine');if(!root)return;
 /* the wall of real work loads after the first paint, so the headline never waits for it */
 var bg=document.querySelector('.h5-bg');
-function loadWall(){if(!bg||bg.dataset.on)return;bg.dataset.on='1';var imgs=[].slice.call(bg.querySelectorAll('img[data-src]')),left=imgs.length;imgs.forEach(function(i){i.onload=i.onerror=function(){if(--left<=4)bg.classList.add('ready')};i.src=i.dataset.src});setTimeout(function(){bg.classList.add('ready')},2500)}
+function loadWall(){if(!bg||bg.dataset.on)return;bg.dataset.on='1';var imgs=[].slice.call(bg.querySelectorAll('img[data-src]')),left=imgs.length;imgs.forEach(function(i){i.onload=i.onerror=function(){if(--left<=6)bg.classList.add('ready')};if(i.dataset.srcset){i.sizes=i.dataset.sizes||'';i.srcset=i.dataset.srcset}i.src=i.dataset.src});setTimeout(function(){bg.classList.add('ready')},2500)}
 if(document.readyState==='complete')setTimeout(loadWall,120);else addEventListener('load',function(){setTimeout(loadWall,120)});
 var doc=document.documentElement,RM=doc.classList.contains('rm'),CAP=doc.classList.contains('cap');
 var bbTrack=window.bbTrack||function(){};
@@ -29,9 +29,9 @@ function show(k){
 /* the cycle stops for good the moment a visitor touches, hovers the picker or tabs into the hero, so nothing
    changes under a finger that is reaching for a button (WCAG 2.2.2, and caught by the click path on 7 Oct) */
 function stop(){touched=true;if(timer){clearInterval(timer);timer=null}}
-var hero=root.closest('.h5');
+var hero=root.closest('.pick');
 if(hero){hero.addEventListener('pointerdown',stop,{passive:true});hero.addEventListener('focusin',stop)}
-var pick=document.querySelector('.h5-pick');if(pick)pick.addEventListener('pointerenter',stop);
+var pick=document.querySelector('.pchips');if(pick)pick.addEventListener('pointerenter',stop);
 chips.forEach(function(c){c.addEventListener('click',function(){
  stop();
  i=keys.indexOf(c.dataset.p);show(c.dataset.p);
