@@ -3,6 +3,10 @@
 (function(){
 'use strict';
 var root=document.getElementById('machine');if(!root)return;
+/* the wall of real work loads after the first paint, so the headline never waits for it */
+var bg=document.querySelector('.h5-bg');
+function loadWall(){if(!bg||bg.dataset.on)return;bg.dataset.on='1';var imgs=[].slice.call(bg.querySelectorAll('img[data-src]')),left=imgs.length;imgs.forEach(function(i){i.onload=i.onerror=function(){if(--left<=4)bg.classList.add('ready')};i.src=i.dataset.src});setTimeout(function(){bg.classList.add('ready')},2500)}
+if(document.readyState==='complete')setTimeout(loadWall,120);else addEventListener('load',function(){setTimeout(loadWall,120)});
 var doc=document.documentElement,RM=doc.classList.contains('rm'),CAP=doc.classList.contains('cap');
 var bbTrack=window.bbTrack||function(){};
 var chips=[].slice.call(document.querySelectorAll('.pchip'));
