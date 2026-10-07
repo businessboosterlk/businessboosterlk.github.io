@@ -1,0 +1,32 @@
+# Business Booster
+
+> Growth agency in Kalubowila, Colombo, Sri Lanka. One in-house team makes films, posts and photographs, builds websites, runs SEO, AEO and GEO, runs paid ads and builds business systems for 20+ active clients. The way to start is WhatsApp on +94 76 741 2531.
+
+## Services
+- [Production](https://businessboosterlk.github.io/production/): Films, posts and photographs made to bring a customer one step closer, not to fill a calendar.
+- [Websites](https://businessboosterlk.github.io/websites/): Designed and built by our own team, fast on a cheap phone on mobile data, with search built in from the first day.
+- [SEO](https://businessboosterlk.github.io/seo/): SEO in plain words: when someone in Sri Lanka types what you sell, your page is the one they land on.
+- [AEO](https://businessboosterlk.github.io/aeo/): AEO: writing and structuring pages so that Google's answer box, voice assistants and AI answers pull their answer from you.
+- [GEO](https://businessboosterlk.github.io/geo/): GEO: when someone asks an AI assistant for a good hotel in Wadduwa or a reliable garage in Nugegoda, your name is in the answer.
+- [Ads](https://businessboosterlk.github.io/ads/): Meta, Google and TikTok campaigns run by the same team that makes the content, with tracking set up before the first rupee is spent and a read of the numbers every week.
+- [Systems store](https://businessboosterlk.github.io/systems/): nine business systems, each with its true status.
+
+## Systems
+- [Garage OS](https://businessboosterlk.github.io/systems/garage-os/): live demo.
+- [Tuition OS](https://businessboosterlk.github.io/systems/tuition-os/): live demo, the password on request.
+- [Gym OS](https://businessboosterlk.github.io/systems/gym-os/): live demo.
+- [Sales OS](https://businessboosterlk.github.io/systems/sales-os/): live demo.
+- [The Hub](https://businessboosterlk.github.io/systems/the-hub/): live demo.
+- [Storefront app](https://businessboosterlk.github.io/systems/storefront-app/): live with a client.
+- [Restaurant OS](https://businessboosterlk.github.io/systems/restaurant-os/): demo on request.
+- [Car care OS](https://businessboosterlk.github.io/systems/car-care-os/): demo on request.
+- [Teaching platform](https://businessboosterlk.github.io/systems/teaching-platform/): in build.
+
+## Free tools
+- [Rank yourself](https://businessboosterlk.github.io/rank/): a website speed scan, an SEO scan and three short quizzes; each quiz hands its result to WhatsApp.
+- [The check-up](https://businessboosterlk.github.io/check-up/): five questions to a plain prescription.
+
+## The business
+- [About](https://businessboosterlk.github.io/about/): the founders Thulaib and Shiara and the in-house team.
+- [Contact](https://businessboosterlk.github.io/contact/): WhatsApp +94 76 741 2531, email businessboosterlk@gmail.com, Kalubowila, Colombo, Sri Lanka.
+- No prices are published on this site. Community management means the team watches every comment and message and flags what needs an answer; the client replies in their own voice.
